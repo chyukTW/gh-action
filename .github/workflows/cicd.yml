@@ -1,0 +1,40 @@
+name: TEST_1
+
+on:
+  push:
+    branches:
+      - master
+      - 'feat/**'
+
+jobs:
+  integration:
+    if: github.event_name == 'push'
+    name: integration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: git_checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        id: setup_node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        id: install_dependencies
+        run: yarn install 2> error_log.txt
+
+      - name: Run test
+        id: test
+        run: yarn test 2> temp.txt
+
+      - name: Get failed test title
+        if: failure() && steps.test.outcome != 'success'
+        run: cat temp.txt | grep FAIL > error_log.txt
+
+      - name: Print
+        run: cat error_log.txt
