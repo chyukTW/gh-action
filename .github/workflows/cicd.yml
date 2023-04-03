@@ -30,12 +30,8 @@ jobs:
 
       - name: Run test
         id: test
-        run: yarn test
+        run: yarn test 2> error_log.txt
 
-      # - name: Get failed test title
-      #   if: failure() && steps.test.outcome != 'success'
-      #   run: cat temp.txt | grep FAIL > error_log.txt
-
-      # - name: Print
-      #   if: always()
-      #   run: cat error_log.txt
+      - name: Print
+        if: always()
+        run: cat error_log.txt
