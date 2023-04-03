@@ -37,4 +37,5 @@ jobs:
         run: cat temp.txt | grep FAIL > error_log.txt
 
       - name: Print
+        if: always()
         run: cat error_log.txt
