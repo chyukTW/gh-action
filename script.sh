@@ -1,5 +1,5 @@
 function run_and_log {
-  export PATH=$PATH:~/.yarn/bin
+  ls
   CMD="$1"
   LOGFILE="$2"
   $CMD 2>&1 | tee $LOGFILE
