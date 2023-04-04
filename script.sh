@@ -1,7 +1,7 @@
 run_and_log() {
   local command=$1
   local log_file=$2
-  local yarn_path="$HOME/.yarn/bin/yarn"
+  local yarn_path="/usr/local/bin/yarn"
 
   $yarn_path run $command 2>&1 | tee "$log_file"
 
