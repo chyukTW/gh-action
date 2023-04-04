@@ -27,12 +27,12 @@ jobs:
       - name: Install dependencies
         id: install_dependencies
         run: |
-          `chmod +x ./script.sh` "yarn install" "error.log"
+          chmod +x script.sh && source script.sh && run_and_log "yarn install" "error.log"
 
       - name: Run test
         id: test
         run: |
-          `chmod +x ./script.sh` "yarn test" "error.log"
+          chmod +x script.sh && source script.sh && run_and_log "yarn test" "error.log"
 
       - name: Print
         if: always()
