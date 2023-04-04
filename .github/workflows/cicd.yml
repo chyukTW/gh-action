@@ -26,11 +26,11 @@ jobs:
 
       - name: Install dependencies
         id: install_dependencies
-        run: chmod +x ./script.sh "yarn install" "error.log"
+        run: sudo chmod +x ./script.sh "yarn install" "error.log"
 
       - name: Run test
         id: test
-        run: chmod +x ./script.sh "yarn test" "error.log"
+        run: sudo chmod +x ./script.sh "yarn test" "error.log"
 
       - name: Print
         if: always()
