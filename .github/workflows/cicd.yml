@@ -31,7 +31,7 @@ jobs:
         id: install_dependencies
         run: |
           yarn install 2> >(tee error.log >&2) | tee /dev/null
-          if [ $? -ne 0 ]; then
+          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
             echo "yarn install failed." >&2
             exit 1
           fi
@@ -40,7 +40,7 @@ jobs:
         id: test
         run: |
           yarn test 2> >(tee error.log >&2) | tee /dev/null
-          if [ $? -ne 0 ]; then
+          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
             echo "yarn test failed." >&2
             exit 1
           fi
