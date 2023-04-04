@@ -24,6 +24,9 @@ jobs:
           node-version: '16'
           cache: 'yarn'
 
+      - name: ls
+        run: ls -al
+
       - name: Install dependencies
         id: install_dependencies
         run: |
