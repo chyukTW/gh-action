@@ -26,11 +26,11 @@ jobs:
 
       - name: Install dependencies
         id: install_dependencies
-        run: yarn install 2> error_log.txt
+        run: yarn install 2>&1 | tee error_log.txt
 
       - name: Run test
         id: test
-        run: yarn test 2> error_log.txt
+        run: yarn install 2>&1 | tee error_log.txt
 
       - name: Print
         if: always()
