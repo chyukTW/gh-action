@@ -29,21 +29,23 @@ jobs:
 
       - name: Install dependencies
         id: install_dependencies
-        run: |
-          yarn install 2> >(tee error.log >&2) | tee /dev/null
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
-            echo "yarn install failed." >&2
-            exit 1
-          fi
+        run:
+          yarn install 2> >(tee error.log >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn install failed." >&2; exit 1; }
+          # yarn install 2> >(tee error.log >&2) | tee /dev/null
+          # if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+          #   echo "yarn install failed." >&2
+          #   exit 1
+          # fi
 
       - name: Run test
         id: test
-        run: |
-          yarn test 2> >(tee error.log >&2) | tee /dev/null
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
-            echo "yarn test failed." >&2
-            exit 1
-          fi
+        run:
+          yarn test 2> >(tee error.log >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn test failed." >&2; exit 1; }
+          # yarn test 2> >(tee error.log >&2) | tee /dev/null
+          # if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+          #   echo "yarn test failed." >&2
+          #   exit 1
+          # fi
 
       - name: Print
         if: always()
