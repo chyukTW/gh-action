@@ -1,4 +1,4 @@
-run_and_log {
+run_and_log() {
   local command=$1
   local log_file=$2
   local yarn_path="$HOME/.yarn/bin/yarn"
