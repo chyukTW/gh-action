@@ -29,13 +29,11 @@ jobs:
 
       - name: Install dependencies
         id: install_dependencies
-        run: |
-          chmod +x script.sh && source script.sh && run_and_log "install" "error.log"
+        run: yarn install 2> >(tee error.log >&2) | tee /dev/tty
 
       - name: Run test
         id: test
-        run: |
-          chmod +x script.sh && source script.sh && run_and_log "test" "error.log"
+        run: yarn test 2> >(tee error.log >&2) | tee /dev/tty
 
       - name: Print
         if: always()
