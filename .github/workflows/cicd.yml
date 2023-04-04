@@ -30,7 +30,7 @@ jobs:
 
       - name: Run build
         id: build
-        run: yarn build 2> >(tee error.log >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn build failed." >&2; exit 1; }
+        run: yarn build &> >(tee error.log >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn build failed." >&2; exit 1; }
 
       - name: Run test
         id: test
