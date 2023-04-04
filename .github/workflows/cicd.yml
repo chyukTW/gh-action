@@ -38,7 +38,7 @@ jobs:
 
       - name: Get failed test title
         if: failure() && steps.test.outcome != 'success'
-        run: cat temp | grep FAIL > error_log.txt
+        run: cat temp | grep FAIL > error.log
 
       - name: Print
         if: always()
