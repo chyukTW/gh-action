@@ -26,21 +26,11 @@ jobs:
 
       - name: Install dependencies
         id: install_dependencies
-        run: |
-          yarn install 2>&1 | tee error.log
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
-            echo "yarn install failed."
-            exit 1
-          fi
+        run: ./script.sh "yarn install" "error.log"
 
       - name: Run test
         id: test
-        run: |
-          yarn test 2>&1 | tee error.log
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
-            echo "yarn test failed."
-            exit 1
-          fi
+        run: ./script.sh "yarn test" "error.log"
 
       - name: Print
         if: always()
