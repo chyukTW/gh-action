@@ -34,11 +34,11 @@ jobs:
 
       - name: Run test
         id: test
-        run: yarn test 2> >(tee temp.log >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn test failed." >&2; exit 1; }
+        run: yarn test 2> >(tee temp >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn test failed." >&2; exit 1; }
 
       - name: Get failed test title
         if: failure() && steps.test.outcome != 'success'
-        run: cat temp.txt | grep FAIL > error_log.txt
+        run: cat temp | grep FAIL > error_log.txt
 
       - name: Print
         if: always()
