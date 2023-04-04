@@ -42,4 +42,4 @@ jobs:
 
       - name: Print
         if: always()
-        run: cat error.log
+        run: cat error_log
