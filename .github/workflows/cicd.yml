@@ -29,11 +29,11 @@ jobs:
 
       - name: Install dependencies
         id: install_dependencies
-        run: yarn install 2> >(tee error.log >&2) | tee /dev/tty
+        run: yarn install 2> >(tee error.log >&2) | tee /dev/null
 
       - name: Run test
         id: test
-        run: yarn test 2> >(tee error.log >&2) | tee /dev/tty
+        run: yarn test 2> >(tee error.log >&2) | tee /dev/null
 
       - name: Print
         if: always()
