@@ -26,15 +26,15 @@ jobs:
 
       - name: Install dependencies
         id: install_dependencies
-        run: yarn install 2> >(tee error.log >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn install failed." >&2; exit 1; }
+        run: yarn install 2> >(tee error.log ) ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn install failed." ; exit 1; }
 
       - name: Run build
         id: build
-        run: yarn build &> >(tee error.log >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn build failed." >&2; exit 1; }
+        run: yarn build &> >(tee error.log ) ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn build failed." ; exit 1; }
 
       - name: Run test
         id: test
-        run: yarn test 2> >(tee temp >&2) | tee /dev/null ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn test failed." >&2; exit 1; }
+        run: yarn test 2> >(tee temp ) ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn test failed." ; exit 1; }
 
       - name: Get failed test title
         if: failure() && steps.test.outcome != 'success'
