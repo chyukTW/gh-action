@@ -34,7 +34,6 @@ jobs:
         # run: yarn build &> >(tee error_log) ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn build failed." ; exit 1; }
 
       - name: Temp Summary
-        if: ${{ failure() }}
         run: |
           echo '<details><summary>:boom: check line break</summary>' >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
