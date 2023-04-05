@@ -43,14 +43,17 @@ jobs:
       - name: Failure Summary
         if: ${{ failure() }}
         run: |
-          echo '<details><summary>:umbrella: View error log</summary>' >> $GITHUB_STEP_SUMMARY
+          echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
+          head -n 10 error_log.txt >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          echo '<details><summary>:boom: View error log</summary>' >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo `cat error_log` >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo '</details>' >> $GITHUB_STEP_SUMMARY
           if [ ${{steps.test.outcome}} == 'failure' ]; then
-            echo '<details><summary>:sunny: View test result</summary>' >> $GITHUB_STEP_SUMMARY
+            echo '<details><summary>:fire: View test result</summary>' >> $GITHUB_STEP_SUMMARY
             echo '' >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
             echo '' >> $GITHUB_STEP_SUMMARY
@@ -58,3 +61,22 @@ jobs:
             echo '```' >> $GITHUB_STEP_SUMMARY
             echo '</details>' >> $GITHUB_STEP_SUMMARY
           fi
+
+      - name: Set Slack Message
+        if: failure()
+        run: |
+          echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
+          head -n 10 error_log >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: Send status to Slack channel in case of failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_CHANNEL: development
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://user-images.githubusercontent.com/103919739/177964568-30ec9c4d-9528-4c88-8191-364ee4033d3c.png
+          SLACK_TITLE: 'Failed with this error:'
+          SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
+          SLACK_USERNAME: AC BOT
