@@ -74,6 +74,6 @@ jobs:
           SLACK_CHANNEL: development
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/177964568-30ec9c4d-9528-4c88-8191-364ee4033d3c.png
-          SLACK_TITLE: '<https://www.naver.com|Failed with this error:>'
+          SLACK_TITLE: <https://www.naver.com|Failed with this error:>
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
           SLACK_USERNAME: AC BOT
