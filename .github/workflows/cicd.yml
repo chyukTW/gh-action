@@ -63,6 +63,7 @@ jobs:
         if: failure()
         run: |
           echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
+          echo -e '\n' >> $GITHUB_ENV
           head -n 10 error_log >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
@@ -75,6 +76,6 @@ jobs:
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/177964568-30ec9c4d-9528-4c88-8191-364ee4033d3c.png
           SLACK_TITLE: 'Failed with this error:'
-          SLACK_MESSAGE: <https://www.naver.com|Click for more details:> " \n " ${{ env.SLACK_MESSAGE }}
+          SLACK_MESSAGE: <https://www.naver.com|Click for more details:> ${{ env.SLACK_MESSAGE }}
           SLACK_USERNAME: AC BOT
           MSG_MINIMAL: true
