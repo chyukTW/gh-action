@@ -43,16 +43,17 @@ jobs:
       - name: Failure Summary
         if: ${{ failure() }}
         run: |
-          echo '<details><summary>View error log</summary>' >> $GITHUB_STEP_SUMMARY
+          echo '<details><summary>:umbrella: View error log</summary>' >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo `cat error_log` >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo '</details>' >> $GITHUB_STEP_SUMMARY
           if [ ${{steps.test.outcome}} == 'failure' ]; then
-            echo '<details><summary>View test log</summary>' >> $GITHUB_STEP_SUMMARY
+            echo '<details><summary>:sunny: View test result</summary>' >> $GITHUB_STEP_SUMMARY
             echo '' >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
+            echo '' >> $GITHUB_STEP_SUMMARY
             echo `cat test_log` >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
             echo '</details>' >> $GITHUB_STEP_SUMMARY
