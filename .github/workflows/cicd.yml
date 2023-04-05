@@ -40,6 +40,9 @@ jobs:
         if: failure() && steps.test.outcome != 'success'
         run: cat temp_log | grep error > error_log
 
-      - name: Print
-        if: always()
-        run: cat error_log
+      - name: Failure Summary
+        if: ${{ failure() }}
+        run: |
+          echo "# Failure Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat error_log.txt >> $GITHUB_STEP_SUMMARY
