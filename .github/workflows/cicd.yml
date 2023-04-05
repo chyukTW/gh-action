@@ -43,9 +43,6 @@ jobs:
       - name: Failure Summary
         if: ${{ failure() }}
         run: |
-          echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
-          head -n 10 error_log.txt >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
           echo '<details><summary>:boom: View error log</summary>' >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
