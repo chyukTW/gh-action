@@ -49,9 +49,11 @@ jobs:
           echo `cat error_log` >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo '</details>' >> $GITHUB_STEP_SUMMARY
-          echo '<details><summary>View test log</summary>' >> $GITHUB_STEP_SUMMARY
-          echo '' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo `cat test_log` >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo '</details>' >> $GITHUB_STEP_SUMMARY
+          if [ ${{steps.test.outcome}} != 'success' ]; then
+            echo '<details><summary>View test log</summary>' >> $GITHUB_STEP_SUMMARY
+            echo '' >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo `cat test_log` >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo '</details>' >> $GITHUB_STEP_SUMMARY
+          fi
