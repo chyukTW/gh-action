@@ -88,5 +88,5 @@ jobs:
           SLACK_USERNAME: AC BOT
           SLACK_TITLE: 'Github Action Failed'
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
-          SLACK_FOOTER: <https://github.com/${{ github.actor }}/gh-action/actions/runs/${{ github.run_id }}| :point_right:ㅤClick for more details>
+          SLACK_FOOTER: <https://github.com/twinnylab/taras-web/actions/runs/${{ github.run_id }}| :point_right:ㅤClick for more details>
           MSG_MINIMAL: true
