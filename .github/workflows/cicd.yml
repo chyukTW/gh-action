@@ -70,7 +70,7 @@ jobs:
         if: failure()
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_CHANNEL: development
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/177964568-30ec9c4d-9528-4c88-8191-364ee4033d3c.png
