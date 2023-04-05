@@ -38,7 +38,7 @@ jobs:
           echo '<details><summary>:boom: check line break</summary>' >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          echo '$(cat error_log)' >> $GITHUB_STEP_SUMMARY
+          echo "$(cat error_log)" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo '</details>' >> $GITHUB_STEP_SUMMARY
 
