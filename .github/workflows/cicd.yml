@@ -37,7 +37,7 @@ jobs:
         run: yarn test 2> >(tee test_log) ; test ${PIPESTATUS[0]} -eq 0 || { echo "yarn test failed." ; exit 1; }
 
       - name: Get failed test title
-        if: failure() && steps.test.outcome != 'success'
+        if: failure() && steps.test.outcome == 'failure'
         run: cat test_log | grep error > error_log
 
       - name: Failure Summary
@@ -49,7 +49,7 @@ jobs:
           echo `cat error_log` >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo '</details>' >> $GITHUB_STEP_SUMMARY
-          if [ ${{steps.test.outcome}} != 'success' ]; then
+          if [ ${{steps.test.outcome}} == 'failure' ]; then
             echo '<details><summary>View test log</summary>' >> $GITHUB_STEP_SUMMARY
             echo '' >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
