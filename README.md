@@ -1,22 +1,32 @@
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/103919739/231953977-9e7b49b0-3187-4b95-abb3-d9fdac81bf6e.png" width="164px" alt="TARAS 로고" />
+
+<img src="https://user-images.githubusercontent.com/103919739/231953977-9e7b49b0-3187-4b95-abb3-d9fdac81bf6e.png" width="164px" alt="TARAS 로고" />  
+  
+<br>
+
+<a href='http://dev-console.taras.twinny.ai/login'>
+<img src='https://img.shields.io/badge/Dev-F1414A?style=for-the-badge'>
+</a>
+
+<a href='http://stg-console.taras.twinny.ai/login'>
+  <img src='https://img.shields.io/badge/QA-4DBE00?style=for-the-badge'>
+</a>
+
+<a href='https://console.taras.twinny.ai/login'>
+  <img src='https://img.shields.io/badge/Prod-633DE5?style=for-the-badge'>
+</a>
+
 </h1>
 
-<div align="center">
-
-![Badge1][badge1] ![Badge2][badge2] ![Badge3][badge3] ![Badge4][badge4] ![Badge5][badge5] ![asd](https://img.shields.io/github/languages/count/beygee/survive)
-
-</div>
-
 로봇 서비스 관제 콘솔 **TARAS Web**은 TARAS를 활용해 다양한 형태의 서비스를 관제하고자 하는 유저에게 보다 빠르고 쉽게 환경을 구성하고 조작할 수 있는 GUI 와 관련 기능을 제공하는 관리자용 대시보드 형태의 웹 프로덕트입니다. TARAS Web 은 생활물류(TS, Twinny Signature) 와 오더피킹(LP) 두개의 제품으로 나뉩니다.
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
 <div align="center">
 
 [**Prerequisites**](#prerequisites) · [**Installation**](#installation) · [**Technology Stack**](#tech-stack) · [**References**](#references) · [**Folder Structure**](#folder-structure)
 
 </div>
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
 <h2 id="prerequisites">🍴&nbsp; Prerequisites</h2>
 
@@ -61,7 +71,7 @@
    yarn start
    ```
 
-로컬에서 정상적으로 실행하기 위해서는 환경 변수가 필요합니다. 웹팀에 문의해 주세요.
+***로컬에서 정상적으로 실행하기 위해서는 환경 변수가 필요합니다. 웹팀에 문의해 주세요.***
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
@@ -86,7 +96,7 @@
 - [TS1 MP 디자인 문서](https://www.figma.com/file/J9BycT1FwwgbPe6ILvAaiI/%5BTS1%5D-MP(ver.2)?node-id=193-49647&t=89m2nfvSOZ3MiOHf-0)
 - [TARAS-Web 컨벤션](https://www.notion.so/twinny/TARAS-Web-dadbeb42f4514817be18c08fe5687b6b?pvs=4)
 
-[Web Guild 노션 페이지](https://www.notion.so/twinny/Web-Guild-0b00f41628674544b24765940a862145)에서 더 많은 정보를 제공하고 있습니다.
+***[Web Guild 노션 페이지](https://www.notion.so/twinny/Web-Guild-0b00f41628674544b24765940a862145)에서 더 많은 정보를 제공하고 있습니다.***
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
@@ -117,16 +127,16 @@ src
 ```
 
 <!-- Link References -->
-
+<!-- 
 [dev]:http://dev-console.taras.twinny.ai "Dev App (external link)"
 [qa]:http://qa-console.taras.twinny.ai "QA App (external link)"
 [prod]:https://console.taras.twinny.ai "Production App (external link)"
-[releases]:https://github.com/twinnylab/taras-web/releases "Latest Release (external link)"
+[releases]:https://github.com/twinnylab/taras-web/releases "Latest Release (external link)" -->
 
 <!-- Badge References -->
 
-[badge1]:https://img.shields.io/badge/mock1-badge1-blue?style=flat-square
-[badge2]:https://img.shields.io/badge/mock2-badge2-red
-[badge3]:https://img.shields.io/badge/mock3-badge3-green
+<!-- [qa]:https://img.shields.io/endpoint?style=flat-square&url=https://badge-fkverin2v6gk.runkit.sh%2Fqa
+[dev]:https://img.shields.io/endpoint?style=flat-square&url=https://badge-fkverin2v6gk.runkit.sh%2Fdev
+[prod]:https://img.shields.io/endpoint?style=flat-square&url=https://badge-fkverin2v6gk.runkit.sh%2Fprod
 [badge4]:https://img.shields.io/badge/mock4-badge4-blueviolet
-[badge5]:https://img.shields.io/badge/mock5-badge5-orange
+[badge5]:https://img.shields.io/badge/mock5-badge5-orange -->
