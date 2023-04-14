@@ -4,11 +4,11 @@
 
 <div align="center">
 
-![Badge1][badge1] ![Badge2][badge2] ![Badge3][badge3] ![Badge4][badge4] ![Badge5][badge5]
+![Badge1][badge1] ![Badge2][badge2] ![Badge3][badge3] ![Badge4][badge4] ![Badge5][badge5] ![asd](https://img.shields.io/github/languages/count/beygee/survive)
 
 </div>
 
-로봇 서비스 관제 콘솔 **TARAS Web** 은 TARP 를 활용해 다양한 형태의 서비스를 관제하고자 하는 유저에게 보다 빠르고 쉽게 환경을 구성하고 조작할 수 있는 GUI 와 관련 기능을 제공하는 관리자용 대시보드 형태의 웹 프로덕트입니다. TARAS Web 은 생활물류(TS, Twinny Signature) 와 오더피킹(LP) 두개의 제품으로 나뉩니다.
+로봇 서비스 관제 콘솔 **TARAS Web**은 TARAS를 활용해 다양한 형태의 서비스를 관제하고자 하는 유저에게 보다 빠르고 쉽게 환경을 구성하고 조작할 수 있는 GUI 와 관련 기능을 제공하는 관리자용 대시보드 형태의 웹 프로덕트입니다. TARAS Web 은 생활물류(TS, Twinny Signature) 와 오더피킹(LP) 두개의 제품으로 나뉩니다.
 
 <div align="center">
 
@@ -71,6 +71,7 @@
 - [React](https://react.dev/)
 - [Apollo Client](https://www.apollographql.com/docs/react/)
 - [Sass](https://sass-lang.com/)
+- [Storybook](https://storybook.js.org/)
 - [Recoil](https://recoiljs.org/)
 - [Jest](https://jestjs.io/)
 - [Recharts](https://recharts.org/en-US/)
@@ -124,7 +125,7 @@ src
 
 <!-- Badge References -->
 
-[badge1]:https://img.shields.io/badge/mock1-badge1-blue
+[badge1]:https://img.shields.io/badge/mock1-badge1-blue?style=flat-square
 [badge2]:https://img.shields.io/badge/mock2-badge2-red
 [badge3]:https://img.shields.io/badge/mock3-badge3-green
 [badge4]:https://img.shields.io/badge/mock4-badge4-blueviolet
