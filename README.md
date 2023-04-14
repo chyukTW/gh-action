@@ -92,11 +92,11 @@
 
 <h2 id="references">📚&nbsp; References</h2>
 
+- [TARAS-Web 컨벤션](https://www.notion.so/twinny/TARAS-Web-dadbeb42f4514817be18c08fe5687b6b?pvs=4)
 - [LP1 MP 화면설계서](https://6p1rdc.axshare.com/?id=uzr991&p=version_history&g=1&sc=3)
 - [TS1 MP 화면설계서](https://owg1yc.axshare.com/#id=f3379l&p=version_history&g=1)
 - [LP1 MP 디자인 문서](https://www.figma.com/file/ShydSF3hBjBYk5DDHuXHM5/%5BLP1%5D-MP?node-id=193-49647&t=kn0vRDr2p0aAzoRG-0)
 - [TS1 MP 디자인 문서](https://www.figma.com/file/J9BycT1FwwgbPe6ILvAaiI/%5BTS1%5D-MP(ver.2)?node-id=193-49647&t=89m2nfvSOZ3MiOHf-0)
-- [TARAS-Web 컨벤션](https://www.notion.so/twinny/TARAS-Web-dadbeb42f4514817be18c08fe5687b6b?pvs=4)
 
 *[Web Guild 노션 페이지](https://www.notion.so/twinny/Web-Guild-0b00f41628674544b24765940a862145)에서 더 많은 정보를 제공하고 있습니다.*
 
