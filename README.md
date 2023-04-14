@@ -4,15 +4,15 @@
   
 <br>
 
-<a href='http://dev-console.taras.twinny.ai/login'>
+<a href='http://dev-console.taras.twinny.ai/login' target="_blank">
 <img src='https://img.shields.io/badge/Dev-F1414A?style=for-the-badge'>
 </a>
 
-<a href='http://stg-console.taras.twinny.ai/login'>
+<a href='http://stg-console.taras.twinny.ai/login' target="_blank">
   <img src='https://img.shields.io/badge/QA-4DBE00?style=for-the-badge'>
 </a>
 
-<a href='http://console.taras.twinny.ai/login'>
+<a href='http://console.taras.twinny.ai/login' target="_blank">
   <img src='https://img.shields.io/badge/Prod-633DE5?style=for-the-badge'>
 </a>
 
