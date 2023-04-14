@@ -18,17 +18,17 @@
 
 </h1>
 
-로봇 서비스 관제 콘솔 TARAS Web은 TARAS를 활용해 다양한 형태의 서비스를 관제하고자 하는 유저에게 보다 빠르고 쉽게 환경을 구성하고 조작할 수 있는 GUI와 관련 기능을 제공하는 관리자용 대시보드 형태의 웹 프로덕트입니다. TARAS Web은 생활물류(TS, Twinny Signature)와 오더피킹(LP) 두개의 제품으로 나뉩니다.
-
-<img width="1054" alt="스크린샷 2023-04-15 오전 2 25 58" src="https://user-images.githubusercontent.com/103919739/232114896-b53970f2-4358-41a8-9926-dcbd5a2e8b59.png">
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
-
 <div align="center">
 
 [**Prerequisites**](#prerequisites) · [**Installation**](#installation) · [**Technology Stack**](#tech-stack) · [**References**](#references) · [**Folder Structure**](#folder-structure)
 
 </div>
+
+로봇 서비스 관제 콘솔 TARAS Web은 TARAS를 활용해 다양한 형태의 서비스를 관제하고자 하는 유저에게 보다 빠르고 쉽게 환경을 구성하고 조작할 수 있는 GUI와 관련 기능을 제공하는 관리자용 대시보드 형태의 웹 프로덕트입니다. TARAS Web은 생활물류(TS, Twinny Signature)와 오더피킹(LP) 두개의 제품으로 나뉩니다.
+
+<img width="1054" alt="스크린샷 2023-04-15 오전 2 25 58" src="https://user-images.githubusercontent.com/103919739/232114896-b53970f2-4358-41a8-9926-dcbd5a2e8b59.png">
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
 <h2 id="prerequisites">🍴&nbsp; Prerequisites</h2>
 
