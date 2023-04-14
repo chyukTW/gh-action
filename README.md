@@ -73,7 +73,7 @@
    yarn start
    ```
 
-***정상적으로 실행하기 위해서는 로컬 환경 변수가 필요합니다. 웹팀에 문의해 주세요.***
+*정상적으로 실행하기 위해서는 로컬 환경 변수가 필요합니다. 웹팀에 문의해 주세요.*
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
@@ -98,7 +98,7 @@
 - [TS1 MP 디자인 문서](https://www.figma.com/file/J9BycT1FwwgbPe6ILvAaiI/%5BTS1%5D-MP(ver.2)?node-id=193-49647&t=89m2nfvSOZ3MiOHf-0)
 - [TARAS-Web 컨벤션](https://www.notion.so/twinny/TARAS-Web-dadbeb42f4514817be18c08fe5687b6b?pvs=4)
 
-***[Web Guild 노션 페이지](https://www.notion.so/twinny/Web-Guild-0b00f41628674544b24765940a862145)에서 더 많은 정보를 제공하고 있습니다.***
+*[Web Guild 노션 페이지](https://www.notion.so/twinny/Web-Guild-0b00f41628674544b24765940a862145)에서 더 많은 정보를 제공하고 있습니다.*
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
