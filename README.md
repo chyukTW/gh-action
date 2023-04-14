@@ -73,7 +73,7 @@
    yarn start
    ```
 
-***로컬에서 정상적으로 실행하기 위해서는 환경 변수가 필요합니다. 웹팀에 문의해 주세요.***
+***정상적으로 실행하기 위해서는 로컬 환경 변수가 필요합니다. 웹팀에 문의해 주세요.***
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" alt="rainbow" />
 
