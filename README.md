@@ -12,7 +12,7 @@
   <img src='https://img.shields.io/badge/QA-4DBE00?style=for-the-badge'>
 </a>
 
-<a href='https://console.taras.twinny.ai/login'>
+<a href='http://console.taras.twinny.ai/login'>
   <img src='https://img.shields.io/badge/Prod-633DE5?style=for-the-badge'>
 </a>
 
