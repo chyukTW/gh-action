@@ -1,6 +1,7 @@
 <h1 align="center">
 
-<img src="https://user-images.githubusercontent.com/103919739/231953977-9e7b49b0-3187-4b95-abb3-d9fdac81bf6e.png" width="164px" alt="TARAS 로고" />  
+<img media="(prefers-color-scheme: dark)" src="https://user-images.githubusercontent.com/103919739/231953977-9e7b49b0-3187-4b95-abb3-d9fdac81bf6e.png" width="164px" alt="TARAS 로고" />  
+<img media="(prefers-color-scheme: light)" src="https://user-images.githubusercontent.com/103919739/232180361-cee0795a-27b6-4344-b9fa-1ef5280d1afc.png" width="164px" alt="TARAS 로고" />  
   
 <br>
 
