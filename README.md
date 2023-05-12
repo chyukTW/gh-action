@@ -6,3 +6,4 @@ feature
 design
 refactor
 bug
+docs
