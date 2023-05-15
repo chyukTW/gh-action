@@ -2,13 +2,13 @@ changelog:
   categories:
     - title: 새로운 기능
       labels:
-        - 기능
+        - 🧀 기능
     - title: 버그 픽스
       labels:
         - 버그
     - title: 코드 리팩토링
       labels:
-        - 리팩토링
+        - ⚙️ 리팩토링
     - title: 디자인 반영
       labels:
         - 디자인
