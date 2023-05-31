@@ -36,7 +36,7 @@ jobs:
             _bucketName="master-bucket"
           fi
           echo "bucket_name=${_bucketName,,}" >> $GITHUB_OUTPUT
-          echo "isFeat=$( [[ $_branch == "*feat*" ]] && echo true || echo false)" >> $GITHUB_ENV
+          echo "isFeat=$( [[ $_bucketName == "*feat*" ]] && echo true || echo false)" >> $GITHUB_ENV
 
       - name: Not Feat
         if: ${{ env.isFeat == 'false' }}
