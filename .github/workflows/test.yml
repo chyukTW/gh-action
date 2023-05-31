@@ -39,7 +39,7 @@ jobs:
           echo "isFeat=$( [[ $_bucketName == "feat-bucket" ]] && echo true || echo false)" >> $GITHUB_ENV
 
       - name: Not Feat
-        if: ${{ env.isFeat == 'false' }}
+        if: env.isFeat == 'false'
         run: |
           echo ${{ github.ref }}
           echo ${{ env.isFeat }}
@@ -47,7 +47,7 @@ jobs:
           echo "Not Feat Bucket"
 
       - name: is Feat
-        if: ${{ env.isFeat == 'true' }}
+        if: env.isFeat == 'false'
         run: |
           echo ${{ github.ref }}
           echo ${{ env.isFeat }}
