@@ -42,7 +42,7 @@ jobs:
         if: ${{ env.isFeat == 'false' }}
         run: |
           echo ${{ github.ref }}
-          echo ${{ steps.get-bucket-name.outputs.isFeat }}
+          echo ${{ env.isFeat }}
           echo ${{ steps.get-bucket-name.outputs.bucket_name }}
           echo "Not Feat Bucket"
 
@@ -50,6 +50,6 @@ jobs:
         if: ${{ env.isFeat == 'true' }}
         run: |
           echo ${{ github.ref }}
-          echo ${{ steps.get-bucket-name.outputs.isFeat }}
+          echo ${{ env.isFeat }}
           echo ${{ steps.get-bucket-name.outputs.bucket_name }}
           echo "Feat Bucket"
