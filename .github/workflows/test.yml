@@ -18,7 +18,7 @@ jobs:
       - name: Get Branch
         id: get-branch
         run: |
-          if [[ ${{ github.head_ref }} == "master" ]]
+          if [[ ${{ github.ref }} == "master" ]]
           then
             _branch="master-"
           else
@@ -41,7 +41,7 @@ jobs:
       - name: Not Feat
         if: ${{ env.isFeat == 'false' }}
         run: |
-          echo ${{ github.head_ref }}
+          echo ${{ github.ref }}
           echo ${{ steps.get-bucket-name.outputs.isFeat }}
           echo ${{ steps.get-bucket-name.outputs.bucket_name }}
           echo "Not Feat Bucket"
@@ -49,7 +49,7 @@ jobs:
       - name: is Feat
         if: ${{ env.isFeat == 'true' }}
         run: |
-          echo ${{ github.head_ref }}
+          echo ${{ github.ref }}
           echo ${{ steps.get-bucket-name.outputs.isFeat }}
           echo ${{ steps.get-bucket-name.outputs.bucket_name }}
           echo "Feat Bucket"
