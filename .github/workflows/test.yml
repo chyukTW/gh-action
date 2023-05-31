@@ -1,0 +1,53 @@
+name: TEST_2
+
+on:
+  push:
+    branches:
+      - master
+      - "feat/**"
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get Branch
+        id: get-branch
+        run: |
+          if [[ echo ${{ github.head_ref }} == "master" ]]
+          then
+            _branch="master-"
+          else
+            _branch="feat-"
+          fi
+          echo "branch=${_branch,,}" >> $GITHUB_OUTPUT
+
+      - name: Get bucket name
+        id: get-bucket-name
+        run: |
+          if [[ ${{ steps.get-branch.outputs.branch }} == "*feat*" ]]
+          then
+            _bucketName="feat-bucket"
+          else
+            _bucketName="master-bucket"
+          fi
+          echo "bucket_name=${_bucketName,,}" >> $GITHUB_OUTPUT
+          echo "isFeat=$( [[ $_branch == "*feat*" ]] && echo true || echo false)" >> $GITHUB_ENV
+
+      - name: Not Feat
+        if: ${{ env.isFeat == 'false' }}
+        run: |
+          echo ${{ steps.get-bucket-name.outputs.isFeat }}
+          echo ${{ steps.get-bucket-name.outputs.bucket_name }}
+          echo "Not Feat Bucket"
+
+      - name: is Feat
+        if: ${{ env.isFeat == 'true' }}
+        run: |
+          echo ${{ steps.get-bucket-name.outputs.isFeat }}
+          echo ${{ steps.get-bucket-name.outputs.bucket_name }}
+          echo "Feat Bucket"
