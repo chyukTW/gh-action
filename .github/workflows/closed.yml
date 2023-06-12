@@ -16,7 +16,8 @@ jobs:
 
       - name: get label
         run: |
-          echo ${{ github.event.pull_request.labels.*.name }}
+          echo ${{ toJson(github.event.pull_request.labels.*.name) }}
+          echo ${{ contains(github.event.pull_request.labels.*.name, '설정') }}
           echo ${{ github.event.pull_request.labels.name }}
 
       - name: get branch
