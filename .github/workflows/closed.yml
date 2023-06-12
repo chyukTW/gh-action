@@ -7,7 +7,7 @@ on:
 
 jobs:
   echo:
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'action:cd') }}
+    if: contains(github.event.pull_request.labels.*.name, 'action:cd')
     name: echo context information
     runs-on: ubuntu-latest
 
@@ -15,17 +15,17 @@ jobs:
       - name: git checkout
         uses: actions/checkout@v3
 
-      - name: get label
-        run: |
-          echo ${{ contains(github.event.pull_request.labels.*.name, 'action:cd') }}
-          echo ${{ toJson(github.event.pull_request.labels) }}
-          echo ${{ github.event.pull_request.labels.*.name }}
-          echo ${{ github.event.pull_request.labels.name }}
-
       - name: get branch
+        id: get-branch
         run: |
-          echo ${{ github.event.ref }}
-          echo ${{ github.head_ref }}
+          _branch=$(echo ${{ github.head_ref }} | cut -d'/' -f2 | cut -f2 -d '#')-
+          echo "branch=${_branch,,}" >> $GITHUB_OUTPUT
 
-      - name: get bucket name
-        run: echo "do later"
+      - name: get bucket object
+        id: get-bucket-object
+        run: |
+          _bucketName="feat-lp-mp.taras.twinny.ai/${{ steps.get-branch.outputs.branch }}"
+          echo "bucket_name=${_bucketName,,}" >> $GITHUB_OUTPUT
+
+      - name: echo result
+        run: echo ${{ steps.get-bucket-object.outputs.bucket_name }}
