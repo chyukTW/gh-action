@@ -17,7 +17,9 @@ jobs:
 
       - name: get label
         run: |
-          echo ${{ toJson(github.event.pull_request.labels.*.name) }}
+          echo ${{ contains(github.event.pull_request.labels.*.name, 'action:cd') }}
+          echo ${{ toJson(github.event.pull_request.labels) }}
+          echo ${{ github.event.pull_request.labels.*.name }}
           echo ${{ github.event.pull_request.labels.name }}
 
       - name: get branch
