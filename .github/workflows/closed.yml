@@ -1,5 +1,3 @@
-# 테스트 다시
-
 name: pr-closed
 
 on:
@@ -19,7 +17,7 @@ jobs:
       - name: get label
         run: |
           echo ${{ toJson(github.event.pull_request.labels.*.name) }}
-          echo ${{ contains(github.event.pull_request.labels.*.name, '설정') }}
+          echo ${{ contains(github.event.pull_request.labels.*.name, 'action:cd') }}
           echo ${{ github.event.pull_request.labels.name }}
 
       - name: get branch
