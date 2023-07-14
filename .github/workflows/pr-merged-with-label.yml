@@ -13,15 +13,14 @@ jobs:
         id: update_major
         run: |
           echo "Update Major"
-          exit 1
 
-      - if: contains(join(github.event.pull_request.labels.*.name, '|'), '버그')
+      - if: steps.update_major.conclusion == 'skipped' &&  contains(join(github.event.pull_request.labels.*.name, '|'), '버그')
         name: Update Patch
         id: update_patch
         run: |
           echo "Update Patch"
-          exit 1
 
-      - name: Update Minor
+      - if: steps.update_major.conclusion == 'skipped' && steps.update_patch.conclusion == 'skipped'
+        name: Update Minor
         run: |
           echo "Update Minor"
