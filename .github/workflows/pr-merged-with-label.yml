@@ -11,5 +11,8 @@ jobs:
       - name: Get Label Name
         id: get_label_name
         env:
-          LABEL_NAME: ${{ github.event.pull_request.labels[0].name || 'No Label' }}
+          LABEL_NAME: ${{ github.event.pull_request.labels[0].name || 'NO LABEL' }}
+        run: echo "$LABEL_NAME"
+
+      - name: echo Label Name Again
         run: echo "$LABEL_NAME"
