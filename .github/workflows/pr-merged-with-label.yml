@@ -8,7 +8,19 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - if: contains(join(github.event.pull_request.labels.*.name, '|'), '기능')
+      - if: contains(join(github.event.pull_request.labels.*.name, '|'), 'BREAKING CHANGE')
+        name: Update Major
+        id: update_major
+        run: |
+          echo "Update Major"
+
+      - if: steps.update_major.conclusion == 'failure' &&  contains(join(github.event.pull_request.labels.*.name, '|'), '버그')
+        name: Update Patch
+        id: update_patch
+        run: |
+          echo "Update Patch"
+
+      - if: steps.update_major.conclusion == 'failure' && steps.update_patch.conclusion == 'failure'
         name: Update Minor
         run: |
           echo "Update Minor"
