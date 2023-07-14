@@ -8,9 +8,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Get Label Name
-        id: get_label_name
-        env:
-          LABEL_NAME: ${{ github.event.pull_request.labels[0].name }}
+      - if: contains(github.event.pull_request.labels.*.name, '기능')
+        name: Update Minor
         run: |
-          echo "$LABEL_NAME"
+          echo "Update Minor"
