@@ -1,0 +1,38 @@
+name: tagging
+
+# ! 트리거하는 쪽에서 type, packageName을 넘겨주기
+# ! packageName을 커밋에서 얻기는 현실적으로 어려움
+# ! packageName을 브랜치에서 얻는 것도 core가 애매함 - 약속이 필요함
+# ? packageName도 label 로부터 얻기 OR 트리거 액션을 path 필터 기반으로 중복으로 만들기
+
+on:
+  workflow_call:
+    inputs:
+      packageName:
+        required: true
+        type: string
+      type:
+        required: true
+        type: string
+
+jobs:
+  is_package:
+    if: contains('core|LP|TS', inputs.packageName)
+    runs-on: ubuntu-latest
+    steps:
+      - if: inputs.type == 'major'
+        name: Update Major
+        id: update_major
+        run: |
+          echo "Update Major ${{ inputs.packageName }}"
+
+      - if: inputs.type == 'minor'
+        name: Update Minor
+        run: |
+          echo "Update Minor ${{ inputs.packageName }}"
+
+      - if: inputs.type == 'patch'
+        name: Update Patch
+        id: update_patch
+        run: |
+          echo "Update Patch ${{ inputs.packageName }}"

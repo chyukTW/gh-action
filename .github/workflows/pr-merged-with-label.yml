@@ -1,3 +1,5 @@
+name: PR merged - label
+
 on:
   pull_request:
     types:
