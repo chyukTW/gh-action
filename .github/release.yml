@@ -1,17 +1,17 @@
 changelog:
   categories:
-    - title: 새로운 기능
+    - title: 기능(LP)
       labels:
-        - 🧀 기능
-    - title: 버그 픽스
+        - LP:기능
+    - title: 기능(TS)
       labels:
-        - 버그
-    - title: 코드 리팩토링
+        - TS:기능
+    - title: 버그 픽스(LP)
       labels:
-        - ⚙️ 리팩토링
-    - title: 디자인 반영
+        - LP:버그 픽스
+    - title: 버그 픽스(TS)
       labels:
-        - 디자인
+        - TS:버그 픽스
     - title: 기타
       labels:
-        - "*"
+        - '*'
