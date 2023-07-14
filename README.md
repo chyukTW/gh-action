@@ -4,3 +4,4 @@ The repository to test a GitHub Action
 
 bugfix
 B - C
+bugfix
