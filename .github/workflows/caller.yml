@@ -10,7 +10,7 @@ jobs:
 
   upload:
     needs: [failed]
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    if: ${{ always() && !contains(join(needs.*.result, ','), 'success') }}
     runs-on: ubuntu-latest
     steps:
       - name: Log
