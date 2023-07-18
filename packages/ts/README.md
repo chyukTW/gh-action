@@ -1,1 +1,1 @@
-ts ci
+ts ci 1
