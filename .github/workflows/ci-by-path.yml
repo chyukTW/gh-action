@@ -3,10 +3,14 @@ name: push-by-path
 on: push
 
 jobs:
-  tests:
+  changes:
     runs-on: ubuntu-latest
+    outputs:
+      lp: ${{ steps.filter.outputs.lp }}
+      ts: ${{ steps.filter.outputs.ts }}
     steps:
       - uses: actions/checkout@v3
+
       - uses: dorny/paths-filter@v2
         id: filter
         with:
@@ -16,11 +20,18 @@ jobs:
             ts:
               - 'packages/ts/**'
 
+  lp:
+    needs: changes
+    if: ${{ needs.changes.outputs.lp == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
       - name: CI(LP)
-        if: steps.filter.outputs.lp == 'true'
         run: echo "ci lp"
 
-      # run only if 'frontend' files were changed
+  ts:
+    needs: changes
+    if: ${{ needs.changes.outputs.ts == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
       - name: CI(TS)
-        if: steps.filter.outputs.ts == 'true'
         run: echo "ci ts"
