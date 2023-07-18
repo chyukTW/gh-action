@@ -22,7 +22,7 @@ jobs:
           path: ${{ inputs.path }}
 
       - name: Display structure of downloaded files
-        run: ls -R
+        run: cat ${{ inputs.path }}
 
     # steps:
     #   - uses: actions/checkout@v3
