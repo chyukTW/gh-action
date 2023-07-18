@@ -1,0 +1,27 @@
+name: pr-ts-trigger
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - synchronize
+    paths:
+      - 'packages/ts/**'
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'packages/ts/**'
+
+jobs:
+  cd_for_feat_PR:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'action:cd')}}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "trigger by PR(ts)"
+
+  cd_for_push:
+    if: ${{ github.event_name == 'push'}}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "trigger by push(ts)"

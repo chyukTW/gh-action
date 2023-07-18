@@ -1,0 +1,27 @@
+name: pr-lp-trigger
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - synchronize
+    paths:
+      - 'packages/lp/**'
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'packages/lp/**'
+
+jobs:
+  cd_for_feat_PR:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'action:cd')}}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "trigger by PR(lp)"
+
+  cd_for_push:
+    if: ${{ github.event_name == 'push'}}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "trigger by PR(lp)"
