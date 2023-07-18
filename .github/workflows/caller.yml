@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Log
-        run: echo "this is log" > log_${{ github.run_id }}
+        run: echo "this is log" > log_${{ github.run_id }}.txt
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: workflow_logs
-          path: log_${{ github.run_id }}
+          path: log_${{ github.run_id }}.txt
           retention-days: 1
 
   call:
