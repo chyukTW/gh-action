@@ -9,8 +9,8 @@ jobs:
       - run: yarn start
 
   upload:
-    needs: failed
-    if: needs.failed.result != 'success'
+    needs: [failed]
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     runs-on: ubuntu-latest
     steps:
       - name: Log
