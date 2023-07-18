@@ -1,0 +1,26 @@
+name: push-by-path
+
+on: push
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            lp:
+              - 'packages/lp/**'
+            ts:
+              - 'packages/ts/**'
+
+      - name: lp tests
+        if: steps.filter.outputs.lp == 'true'
+        run: echo "lp"
+
+      # run only if 'frontend' files were changed
+      - name: frontend tests
+        if: steps.filter.outputs.ts == 'true'
+        run: echo "ts"
