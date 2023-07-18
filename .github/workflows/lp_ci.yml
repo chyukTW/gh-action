@@ -1,0 +1,12 @@
+name: lp_ci
+
+on:
+  push:
+    paths:
+      - 'packages/lp/**'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "ci lp"
