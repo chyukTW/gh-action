@@ -23,7 +23,7 @@ jobs:
 
       - name: Display structure of downloaded files
         run: ls -R
-        working-directory: log_${{ inputs.path }}
+
     # steps:
     #   - uses: actions/checkout@v3
 
