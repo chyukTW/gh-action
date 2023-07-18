@@ -11,6 +11,6 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-      - run: gh download ${{ inputs.runId }} -n workflow_log
+      - run: gh run download ${{ inputs.runId }} -n workflow_log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
