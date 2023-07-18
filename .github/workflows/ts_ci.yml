@@ -1,0 +1,15 @@
+name: ts_ci
+
+on:
+  push:
+    branches:
+      - master
+      - 'feat/**'
+    paths:
+      - 'packages/ts/**'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "ci ts"
