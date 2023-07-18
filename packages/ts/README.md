@@ -1,2 +1,1 @@
-only ts
-2
+ts
