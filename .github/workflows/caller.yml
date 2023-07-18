@@ -10,7 +10,7 @@ jobs:
 
   upload:
     needs: failed
-    if: needs.failed.result == 'failure'
+    if: needs.failed.result != 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Log
