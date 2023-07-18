@@ -3,7 +3,10 @@ name: called
 on:
   workflow_call:
     inputs:
-      runId:
+      name:
+        required: true
+        type: string
+      path:
         required: true
         type: string
 
@@ -15,11 +18,12 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          path: worflow_log/log_${{ inputs.runId }}
+          name: ${{ inputs.name }}
+          path: ${{ inputs.path }}
 
       - name: Display structure of downloaded files
         run: ls -R
-        working-directory: worflow_log/log_${{ inputs.runId }}
+        working-directory: log_${{ inputs.path }}
     # steps:
     #   - uses: actions/checkout@v3
 

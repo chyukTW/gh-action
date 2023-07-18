@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Log
-        run: echo "this is log" > workflow_log
+        run: echo "this is log" > log_${{ github.run_id }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
@@ -20,4 +20,5 @@ jobs:
     needs: artifact
     uses: ./.github/workflows/called.yml
     with:
-      runId: ${{ github.run_id }}
+      name: workflow_logs
+      path: log_${{ github.run_id }}
