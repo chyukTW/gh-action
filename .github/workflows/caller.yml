@@ -9,7 +9,8 @@ jobs:
       - run: yarn start
 
   upload:
-    if: failure()
+    needs: failed
+    if: needs.failed.result == 'failure'
     runs-on: ubuntu-latest
     steps:
       - name: Log
@@ -24,16 +25,16 @@ jobs:
           retention-days: 1
 
   summary:
-    if: failure()
     needs: upload
+    if: needs.upload.result == 'success'
     uses: ./.github/workflows/summary.yml
     with:
       name: workflow_logs
       path: log_${{ github.run_id }}.txt
 
   notify:
-    if: failure()
     needs: upload
+    if: needs.upload.result == 'success'
     uses: ./.github/workflows/notify.yml
     with:
       name: workflow_logs
