@@ -1,1 +1,1 @@
-change on lp
+only lp
