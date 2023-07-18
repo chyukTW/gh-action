@@ -1,0 +1,33 @@
+name: notify
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+      path:
+        required: true
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.name }}
+
+      - run: cat ${{ inputs.path }} > error_log
+
+      - name: Set Slack Message
+        run: |
+          echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
+          echo -e '\n' >> $GITHUB_ENV
+          head -n 10 error_log >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: Send a message to Slack in case of failure
+        run: echo "send !"

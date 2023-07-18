@@ -3,7 +3,13 @@ name: caller
 on: push
 
 jobs:
-  artifact:
+  failed:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+
+  upload:
+    if: failure()
     runs-on: ubuntu-latest
     steps:
       - name: Log
@@ -14,11 +20,21 @@ jobs:
         with:
           name: workflow_logs
           path: log_${{ github.run_id }}.txt
+          if-no-files-found: error
           retention-days: 1
 
-  call:
-    needs: artifact
-    uses: ./.github/workflows/called.yml
+  summary:
+    if: failure()
+    needs: upload
+    uses: ./.github/workflows/summary.yml
+    with:
+      name: workflow_logs
+      path: log_${{ github.run_id }}.txt
+
+  notify:
+    if: failure()
+    needs: upload
+    uses: ./.github/workflows/notify.yml
     with:
       name: workflow_logs
       path: log_${{ github.run_id }}.txt
