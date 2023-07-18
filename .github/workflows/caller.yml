@@ -6,7 +6,7 @@ jobs:
   failed:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - run: yarn start
 
   upload:
     if: failure()

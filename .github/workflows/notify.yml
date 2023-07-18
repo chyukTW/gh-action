@@ -30,4 +30,4 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Send a message to Slack in case of failure
-        run: echo "send !"
+        run: echo ${{ env.SLACK_MESSAGE }}
