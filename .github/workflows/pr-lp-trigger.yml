@@ -1,0 +1,29 @@
+name: pr-lp-trigger
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - synchronize
+    paths:
+      - 'packages/lp/**'
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'packages/lp/**'
+
+jobs:
+  cd_for_feat_PR:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'action:cd')}}
+    uses: ./.github/workflows/lp_cd.yml
+    with:
+      branchName: ${{ github.head_ref }}
+    secrets: inherit
+
+  cd_for_push:
+    if: ${{ github.event_name == 'push'}}
+    uses: ./.github/workflows/lp_cd.yml
+    with:
+      branchName: ${GITHUB_REF#refs/heads/}
+    secrets: inherit
