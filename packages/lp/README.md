@@ -1,2 +1,1 @@
-only lp
-1
+only lp pr
