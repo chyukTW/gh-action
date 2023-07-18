@@ -17,6 +17,7 @@ jobs:
           retention-days: 1
 
   call:
+    needs: artifact
     uses: ./.github/workflows/called.yml
     with:
       runId: ${{ github.run_id }}
