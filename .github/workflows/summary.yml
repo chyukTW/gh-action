@@ -14,6 +14,14 @@ jobs:
   summarize:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.name }}
+
+      - run: cat ${{ inputs.path }} > error_log
+
       - name: Failure Summary
         run: |
           echo '<details><summary>:boom: View error log</summary>' >> $GITHUB_STEP_SUMMARY
