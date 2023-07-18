@@ -1,0 +1,29 @@
+name: pr-base-trigger
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - synchronize
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            lp:
+              - 'packages/lp/**'
+            ts:
+              - 'packages/ts/**'
+
+      - name: CD(LP)
+        if: steps.filter.outputs.lp == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd')
+        run: echo "cd lp"
+
+      - name: CD(TS)
+        if: steps.filter.outputs.ts == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd')
+        run: echo "cd ts"
