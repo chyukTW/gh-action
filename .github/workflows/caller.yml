@@ -1,0 +1,22 @@
+name: caller
+
+on: push
+
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: echo "this is log" > workflow_log
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: workflow_log
+          path: workflow_log
+          retention-days: 1
+
+  call:
+    uses: ./.github/workflows/called.yml
+    with:
+      runId: ${{ github.run_id }}

@@ -1,0 +1,16 @@
+name: called
+
+on:
+  workflow_call:
+    inputs:
+      runId:
+        required: true
+        type: string
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh download ${{ inputs.runId }} -n workflow_log
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
