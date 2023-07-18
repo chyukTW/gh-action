@@ -1,1 +1,1 @@
-ts ci 1
+only ts
