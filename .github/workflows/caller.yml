@@ -12,8 +12,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: workflow_log
-          path: workflow_log
+          name: workflow_logs
+          path: log_${{ github.run_id }}
           retention-days: 1
 
   call:

@@ -13,6 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: gh run download ${{ inputs.runId }} -n workflow_log
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v3
+        with:
+          path: worflow_log/log_${{ inputs.runId }}
+
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: worflow_log/log_${{ inputs.runId }}
+    # steps:
+    #   - uses: actions/checkout@v3
+
+    #   - run: gh run download ${{ inputs.runId }} -n workflow_log
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
