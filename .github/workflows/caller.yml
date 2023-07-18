@@ -21,4 +21,4 @@ jobs:
     uses: ./.github/workflows/called.yml
     with:
       name: workflow_logs
-      path: log_${{ github.run_id }}
+      path: log_${{ github.run_id }}.txt
