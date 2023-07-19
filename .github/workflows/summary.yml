@@ -1,14 +1,6 @@
 name: summarize
 
-on:
-  workflow_call:
-    inputs:
-      name:
-        required: true
-        type: string
-      path:
-        required: true
-        type: string
+on: workflow_call
 
 jobs:
   summarize:
@@ -18,9 +10,9 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: ${{ inputs.name }}
+          name: workflow_logs
 
-      - run: cat ${{ inputs.path }} > error_log
+      - run: cat log_${{ github.run_id }}.txt > error_log
 
       - name: Failure Summary
         run: |
