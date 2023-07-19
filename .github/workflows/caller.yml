@@ -27,7 +27,7 @@ jobs:
   summary:
     needs: upload
     if: ${{ always() && needs.upload.result == 'success' }}
-    uses: ./.github/workflows/summary.yml
+    uses: ./.github/workflows/lp/summary.yml
     with:
       name: workflow_logs
       path: log_${{ github.run_id }}.txt
@@ -35,7 +35,7 @@ jobs:
   notify:
     needs: upload
     if: ${{ always() && needs.upload.result == 'success' }}
-    uses: ./.github/workflows/notify.yml
+    uses: ./.github/workflows/ts/notify.yml
     with:
       name: workflow_logs
       path: log_${{ github.run_id }}.txt
