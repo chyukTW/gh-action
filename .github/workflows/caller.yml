@@ -8,6 +8,8 @@ jobs:
     steps:
       - run: yarn start &> log_${{ github.run_id }}.txt
 
+      - run: ls -al
+
   upload:
     needs: [failed]
     if: ${{ always() && !contains(join(needs.*.result, ','), 'success') }}
@@ -15,6 +17,8 @@ jobs:
     steps:
       - name: Log
         run: echo "this is not log"
+
+      - run: ls -al
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
