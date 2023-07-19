@@ -8,7 +8,8 @@ jobs:
     steps:
       - name: start
         id: start
-        run: yarn start &> log_${{ github.run_id }}.txt
+        # run: yarn start &> log_${{ github.run_id }}.txt
+        run: echo "hi" &> log_${{ github.run_id }}.txt
 
       - name: upload
         if: failure()
@@ -28,3 +29,10 @@ jobs:
     needs: failed
     if: ${{ always() && needs.failed.result != 'success' }}
     uses: ./.github/workflows/notify.yml
+
+  call_cd:
+    needs: failed
+    if: needs.failed.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "call cd"
