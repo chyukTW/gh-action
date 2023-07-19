@@ -8,8 +8,7 @@ jobs:
     steps:
       - name: start
         id: start
-        # run: yarn start &> log_${{ github.run_id }}.txt
-        run: echo "hi" &> log_${{ github.run_id }}.txt
+        run: yarn start &> log_${{ github.run_id }}.txt
 
       - name: upload
         if: failure()
