@@ -8,22 +8,22 @@ jobs:
 
   failure:
     needs: success
-    if: ${{ always() && needs.success.result == 'success' }}
+    if: needs.success.result == 'success'
     uses: ./.github/workflows/failure-upload.yml
 
+  call_cd:
+    needs: success
+    if: needs.success.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "call cd"
+
   summary:
-    needs: [success, failure]
+    needs: [success, failure, call_cd]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
     uses: ./.github/workflows/summary.yml
 
   notify:
-    needs: [success, failure]
+    needs: [success, failure, call_cd]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
     uses: ./.github/workflows/notify.yml
-
-  # call_cd:
-  #   needs: failed
-  #   if: needs.failed.result == 'success'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo "call cd"
