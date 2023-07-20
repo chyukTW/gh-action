@@ -26,6 +26,7 @@ jobs:
 
   after_summary:
     needs: summary
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ needs.summary.result }}
@@ -37,6 +38,7 @@ jobs:
 
   after_notify:
     needs: notify
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ needs.notify.result }}
