@@ -1,6 +1,9 @@
 name: push-by-path
 
-on: push
+on:
+  push:
+    branches:
+      - 'master'
 
 jobs:
   changes:
