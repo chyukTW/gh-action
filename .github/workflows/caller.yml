@@ -24,10 +24,22 @@ jobs:
     if: ${{ always() && needs.failed.result != 'success' }}
     uses: ./.github/workflows/summary.yml
 
+  after_summary:
+    needs: summary
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ needs.summary.result }}
+
   notify:
     needs: failed
     if: ${{ always() && needs.failed.result != 'success' }}
     uses: ./.github/workflows/notify.yml
+
+  after_notify:
+    needs: notify
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ needs.notify.result }}
 
   call_cd:
     needs: failed
