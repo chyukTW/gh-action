@@ -1,0 +1,20 @@
+name: success-upload
+
+on: workflow_call
+
+jobs:
+  failed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: start
+        id: start
+        run: echo "hello"
+
+      - name: upload
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: workflow_logs
+          path: log_${{ github.run_id }}.txt
+          if-no-files-found: error
+          retention-days: 1

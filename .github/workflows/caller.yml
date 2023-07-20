@@ -3,49 +3,27 @@ name: caller
 on: push
 
 jobs:
-  failed:
-    runs-on: ubuntu-latest
-    steps:
-      - name: start
-        id: start
-        run: yarn start &> log_${{ github.run_id }}.txt
+  success:
+    uses: ./.github/workflows/success-upload.yml
 
-      - name: upload
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: workflow_logs
-          path: log_${{ github.run_id }}.txt
-          if-no-files-found: error
-          retention-days: 1
+  failure:
+    needs: success
+    if: ${{ always() && needs.success.result == 'success' }}
+    uses: ./.github/workflows/failure-upload.yml
 
   summary:
-    needs: failed
-    if: ${{ always() && needs.failed.result != 'success' }}
+    needs: [success, failure]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
     uses: ./.github/workflows/summary.yml
 
-  after_summary:
-    needs: summary
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{ needs.summary.result }}
-
   notify:
-    needs: failed
-    if: ${{ always() && needs.failed.result != 'success' }}
+    needs: [success, failure]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
     uses: ./.github/workflows/notify.yml
 
-  after_notify:
-    needs: notify
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{ needs.notify.result }}
-
-  call_cd:
-    needs: failed
-    if: needs.failed.result == 'success'
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "call cd"
+  # call_cd:
+  #   needs: failed
+  #   if: needs.failed.result == 'success'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "call cd"
