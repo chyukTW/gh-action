@@ -32,7 +32,8 @@ jobs:
         if: github.ref_name == 'master'
         run: |
           echo "update lp minor"
-          echo "${{ github.ref_name }}"
+          echo `git tag -l --sort -v:refname "ts/*" | head -n 1` | cut -d. -f2
+          echo `git tag -l --sort -v:refname "lp/*" | head -n 1` | sed "s/.5./.6./"
 
       - name: Update LP Path Version
         if: github.ref_name == 'lp-qa'
