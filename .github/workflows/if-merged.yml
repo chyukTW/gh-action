@@ -29,12 +29,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update LP Minor Version
-        if: ${{ github.ref_name }} == 'master'
-        run: echo "update lp minor"
+        if: github.ref_name == 'master'
+        run: |
+          echo "update lp minor"
+          echo "${{ github.ref_name }}"
 
       - name: Update LP Path Version
-        if: ${{ github.ref_name }} == 'lp-qa'
-        run: echo "update lp patch"
+        if: github.ref_name == 'lp-qa'
+        run: |
+          echo "update lp patch"
+          echo "${{ github.ref_name }}"
 
   ts_version:
     needs: changes
@@ -42,9 +46,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update TS Minor Version
-        if: ${{ github.ref_name }} == 'master'
+        if: github.ref_name == 'master'
         run: echo "update ts minor"
 
       - name: Update TS Path Version
-        if: ${{ github.ref_name }} == 'ts-qa'
+        if: github.ref_name == 'ts-qa'
         run: echo "update ts patch"
