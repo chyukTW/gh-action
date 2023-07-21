@@ -30,11 +30,15 @@ jobs:
     steps:
       - name: Update LP Minor Version
         if: ${{ github.ref_name }} == 'master'
-        run: echo "update lp minor"
+        run: |
+          echo "update lp minor"
+          echo "${{ github.ref_name }}"
 
       - name: Update LP Path Version
         if: ${{ github.ref_name }} == 'lp-qa'
-        run: echo "update lp patch"
+        run: |
+          echo "update lp patch"
+          echo "${{ github.ref_name }}"
 
   ts_version:
     needs: changes
