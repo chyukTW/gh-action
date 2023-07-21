@@ -1,0 +1,50 @@
+name: if-merged
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  changes:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    outputs:
+      lp: ${{ steps.filter.outputs.lp }}
+      ts: ${{ steps.filter.outputs.ts }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            lp:
+              - 'packages/lp/**'
+            ts:
+              - 'packages/ts/**'
+
+  lp_version:
+    needs: changes
+    if: needs.changes.outputs.lp == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update LP Minor Version
+        if: ${{ github.ref_name }} == 'master'
+        run: echo "update lp minor"
+
+      - name: Update LP Path Version
+        if: ${{ github.ref_name }} == 'lp-qa'
+        run: echo "update lp patch"
+
+  ts_version:
+    needs: changes
+    if: needs.changes.outputs.ts == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update TS Minor Version
+        if: ${{ github.ref_name }} == 'master'
+        run: echo "update ts minor"
+
+      - name: Update TS Path Version
+        if: ${{ github.ref_name }} == 'ts-qa'
+        run: echo "update ts patch"
