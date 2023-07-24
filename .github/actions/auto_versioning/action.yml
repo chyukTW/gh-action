@@ -1,6 +1,8 @@
 name: auto_versioning
 description: use this action to get a latest tag of package
 inputs:
+  token:
+    required: true
   package:
     required: true
   segment:
@@ -38,6 +40,8 @@ runs:
         echo "semver=$new_version" >> $GITHUB_OUTPUT
 
     - id: push-tags
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
       shell: bash
       run: |
         git config --global user.name "${{ steps.versioning.outputs.username }}"
