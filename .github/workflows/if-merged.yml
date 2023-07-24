@@ -29,10 +29,7 @@ jobs:
     if: needs.changes.outputs.lp == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Get Latest Version(LP)
-        id: get-version
+      - id: get-version
         uses: ./.github/actions/get_latest_tag
         with:
           package: lp
@@ -41,25 +38,32 @@ jobs:
         if: github.ref_name == 'master'
         run: |
           echo "update lp minor"
-          echo "${{ steps.get-version.outputs.version }}"
+          echo "latest version: ${{ steps.get-version.outputs.version }}"
 
       - name: Update LP Path Version
         if: github.ref_name == 'lp-qa'
         run: |
           echo "update lp patch"
-          echo "${{ steps.get-version.outputs.version }}"
+          echo "latest version: ${{ steps.get-version.outputs.version }}"
 
   ts_version:
     needs: changes
     if: needs.changes.outputs.ts == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - id: get-version
+        uses: ./.github/actions/get_latest_tag
+        with:
+          package: ts
 
       - name: Update TS Minor Version
         if: github.ref_name == 'master'
-        run: echo "update ts minor"
+        run: |
+          echo "update ts minor"
+          echo "latest version: ${{ steps.get-version.outputs.version }}"
 
       - name: Update TS Path Version
         if: github.ref_name == 'ts-qa'
-        run: echo "update ts patch"
+        run: |
+          echo "update ts patch"
+          echo "latest version: ${{ steps.get-version.outputs.version }}"
