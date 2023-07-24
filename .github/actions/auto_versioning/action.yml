@@ -30,8 +30,6 @@ runs:
           exit 1
         fi
 
-        new_version="v${segments[0]}.${segments[1]}.${segments[2]}"
-
         echo "new version: $new_version"
 
         echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
