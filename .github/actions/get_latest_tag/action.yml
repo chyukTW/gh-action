@@ -1,9 +1,8 @@
 name: get_latest_tag
 description: 'use this action to get a latest tag of package'
 inputs:
-  inputs:
-    package:
-      required: true
+  package:
+    required: true
 outputs:
   version:
     value: ${{ steps.get-tag.outputs.result }}
