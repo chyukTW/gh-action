@@ -9,7 +9,6 @@ inputs:
     required: true
   description:
     default: ''
-    required: false
 outputs:
   version:
     value: ${{ steps.versioning.outputs.semver }}
@@ -51,5 +50,5 @@ runs:
       run: |
         git config --global user.name "${{ steps.versioning.outputs.username }}"
         git config --global user.email ${{  steps.versioning.outputs.email }}
-        git tag -a ${{ inputs.package }}/${{ steps.versioning.outputs.semver }} -m "${{ input.description }}"
+        git tag -a ${{ inputs.package }}/${{ steps.versioning.outputs.semver }} -m "${{ inputs.description }}"
         git push origin --tags
