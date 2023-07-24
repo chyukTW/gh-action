@@ -4,9 +4,9 @@ inputs:
   inputs:
     package:
       required: true
-  outputs:
-    version:
-      value: ${{ steps.get-tag.outputs.result }}
+outputs:
+  version:
+    value: ${{ steps.get-tag.outputs.result }}
 
 runs:
   using: 'composite'
