@@ -29,6 +29,8 @@ jobs:
     if: needs.changes.outputs.lp == 'true'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
       - id: get-version
         uses: ./.github/actions/get_latest_tag
         with:
@@ -51,6 +53,8 @@ jobs:
     if: needs.changes.outputs.ts == 'true'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
       - id: get-version
         uses: ./.github/actions/get_latest_tag
         with:
