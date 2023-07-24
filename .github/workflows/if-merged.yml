@@ -1,14 +1,13 @@
 name: if-merged
 
-# on:
-#   pull_request:
-#     types:
-#       - closed
-on: push
+on:
+  pull_request:
+    types:
+      - closed
 
 jobs:
   changes:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       lp: ${{ steps.filter.outputs.lp }}
@@ -24,7 +23,7 @@ jobs:
             ts:
               - 'packages/ts/**'
 
-  lp_version:
+  lp_versioning:
     needs: changes
     if: needs.changes.outputs.lp == 'true'
     runs-on: ubuntu-latest
@@ -52,7 +51,7 @@ jobs:
           segment: patch
           previous: ${{ steps.get-version.outputs.version }}
 
-  ts_version:
+  ts_versioning:
     needs: changes
     if: needs.changes.outputs.ts == 'true'
     runs-on: ubuntu-latest
