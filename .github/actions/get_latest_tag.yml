@@ -21,4 +21,4 @@ jobs:
       - id: get-tag
         run: |
           git fetch --all --tags
-          echo "tag=$(echo `git tag -l --sort -v:refname "ts/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
+          echo "tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
