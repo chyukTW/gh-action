@@ -24,19 +24,17 @@ runs:
         if [[ ${{ inputs.segment }} == minor ]]
         then
           ((segments[1]++))
-          echo "segments: ${segments[@]}"
         elif [[ ${{ inputs.segment }} == patch ]]
         then
           ((segments[2]++))
-          echo "segments: ${segments[@]}"
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
-          echo "segments: ${segments[@]}"
-          exit 1
         fi
 
         echo "done if statement"
+
         new_version="v${segments[0]}.${segments[1]}.${segments[2]}"
+
         echo "new version: $new_version"
 
         echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
