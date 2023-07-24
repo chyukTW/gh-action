@@ -19,8 +19,6 @@ runs:
         version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
         segments=(${version//./ })
 
-        echo "segments: ${segments[@]}"
-
         if [[ ${{ inputs.segment }} == minor ]]
         then
           ((segments[1]++))
