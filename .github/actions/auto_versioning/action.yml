@@ -20,10 +20,10 @@ runs:
         _segment=${{ inputs.segment }}
         segments=(${version//./ })
 
-        if [[ '_segment' == 'minor' ]]
+        if [[ '$_segment' == 'minor' ]]
         then
           ((segments[1]++))
-        elif [[ '_segment' == 'patch' ]]
+        elif [[ '$_segment' == 'patch' ]]
         then
           ((segments[2]++))
         else
