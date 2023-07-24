@@ -29,7 +29,7 @@ runs:
           ((segments[2]++))
         fi
 
-        if [[ !${{ contains('minor|patch', ${{ inputs.segment }}) }} ]]
+        if [[ !contains('minor|patch', ${{ inputs.segment }}) ]]
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
           exit 1
