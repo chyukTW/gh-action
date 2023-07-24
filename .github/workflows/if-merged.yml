@@ -32,21 +32,25 @@ jobs:
       - uses: actions/checkout@v3
 
       - id: get-version
-        uses: ./.github/actions/get_latest_tag
+        uses: ./.github/actions/get_package_version
         with:
           package: lp
 
       - name: Update LP Minor Version
         if: github.ref_name == 'master'
-        run: |
-          echo "update lp minor"
-          echo "latest version: ${{ steps.get-version.outputs.version }}"
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: minor
+          preivous: ${{ steps.get-version.outputs.version }}
 
       - name: Update LP Path Version
         if: github.ref_name == 'lp-qa'
-        run: |
-          echo "update lp patch"
-          echo "latest version: ${{ steps.get-version.outputs.version }}"
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: patch
+          preivous: ${{ steps.get-version.outputs.version }}
 
   ts_version:
     needs: changes
@@ -56,18 +60,22 @@ jobs:
       - uses: actions/checkout@v3
 
       - id: get-version
-        uses: ./.github/actions/get_latest_tag
+        uses: ./.github/actions/get_package_version
         with:
           package: ts
 
-      - name: Update TS Minor Version
+      - name: Update LP Minor Version
         if: github.ref_name == 'master'
-        run: |
-          echo "update ts minor"
-          echo "latest version: ${{ steps.get-version.outputs.version }}"
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: minor
+          preivous: ${{ steps.get-version.outputs.version }}
 
-      - name: Update TS Path Version
-        if: github.ref_name == 'ts-qa'
-        run: |
-          echo "update ts patch"
-          echo "latest version: ${{ steps.get-version.outputs.version }}"
+      - name: Update LP Path Version
+        if: github.ref_name == 'lp-qa'
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: patch
+          preivous: ${{ steps.get-version.outputs.version }}

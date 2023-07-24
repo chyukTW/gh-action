@@ -1,4 +1,4 @@
-name: get_latest_tag
+name: get_package_version
 description: 'use this action to get a latest tag of package'
 inputs:
   package:

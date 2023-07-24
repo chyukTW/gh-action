@@ -1,0 +1,44 @@
+name: get_package_version
+description: use this action to get a latest tag of package
+inputs:
+  package:
+    required: true
+  segment:
+    required: true
+  previous:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+
+    - id: versioning
+      shell: bash
+      run: |
+        version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
+        segments=(${_version//./ })
+
+        if [[ ${{ inputs.segment }} == "minor" ]]; 
+        then
+          ((segments[1]++))
+        elif [[ ${{ inputs.segment }} == "patch" ]]; 
+        then
+          ((segments[2]++))
+        else
+          echo "Invalid segment provided. Supported segments are 'minor' or 'patch'."
+          exit 1
+        fi
+
+        new_version="v${segments[0]}.${segments[1]}.${segments[2]}"
+
+        echo "new version: ($new_version)"
+        echo "result=(echo $new_version)" >> $GITHUB_OUTPUT
+
+    - id: push-tags
+      shell: bash
+      run: |
+        git config --global user.name "${{ env.USER_NAME }}"
+        git config --global user.email ${{ env.USER_EMAIL }}
+        git tag -a ${{ inputs.package }}/v${{ steps.versioning.outputs.result }} -m "test tags"
+        git push origin --tags
