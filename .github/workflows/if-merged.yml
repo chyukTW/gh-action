@@ -43,7 +43,6 @@ jobs:
           package: lp
           segment: minor
           previous: ${{ steps.get-version.outputs.version }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update LP Path Version
         if: github.ref_name == 'lp-qa'
@@ -52,7 +51,6 @@ jobs:
           package: lp
           segment: patch
           previous: ${{ steps.get-version.outputs.version }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
   ts_version:
     needs: changes
@@ -73,7 +71,6 @@ jobs:
           package: ts
           segment: minor
           previous: ${{ steps.get-version.outputs.version }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update TS Path Version
         if: github.ref_name == 'ts-qa'
@@ -82,4 +79,3 @@ jobs:
           package: ts
           segment: patch
           previous: ${{ steps.get-version.outputs.version }}
-          token: ${{ secrets.GITHUB_TOKEN }}
