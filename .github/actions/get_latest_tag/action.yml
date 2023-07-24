@@ -17,7 +17,7 @@ runs:
       shell: bash
       run: |
         git fetch --all --tags
-        echo "tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
+        echo "result=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
 
 # name: get_latest_tag
 
