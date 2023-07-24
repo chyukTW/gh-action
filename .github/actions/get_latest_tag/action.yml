@@ -14,10 +14,11 @@ runs:
   steps:
     - uses: actions/checkout@v3
 
-    - run: |
-        git fetch --all --tags
-        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2
-
+    - shell: bash
+      run: ls
+      # run: |
+      #   git fetch --all --tags
+      #   echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2
 # name: get_latest_tag
 
 # on:
