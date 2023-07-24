@@ -27,7 +27,7 @@ runs:
         if [[ ${{ inputs.segment }} == 'minor' ]]
         then
           ((segments[1]++))
-        elif [[ ${{ inputs.segment }} == 'minor' ]]
+        elif [[ ${{ inputs.segment }} == 'patch' ]]
         then
           ((segments[2]++))
         else
