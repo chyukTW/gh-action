@@ -1,44 +1,44 @@
-name: get_package_version
-description: 'use this action to get a latest tag of package'
+name: auto_versioning
+description: use this action to get a latest tag of package
 inputs:
   package:
     required: true
-outputs:
-  version:
-    value: ${{ steps.get-tag.outputs.result }}
+  segment:
+    required: true
+  previous:
+    required: true
 
 runs:
-  using: 'composite'
+  using: composite
   steps:
     - uses: actions/checkout@v3
 
-    - id: get-tag
+    - id: versioning
       shell: bash
       run: |
-        git fetch --all --tags
-        echo "result=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
+        version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
+        segments=(${_version//./ })
 
-# name: get_latest_tag
+        if [[ ${{ inputs.segment }} == "minor" ]]; 
+        then
+          ((segments[1]++))
+        elif [[ ${{ inputs.segment }} == "patch" ]]; 
+        then
+          ((segments[2]++))
+        else
+          echo "Invalid segment provided. Supported segments are 'minor' or 'patch'."
+          exit 1
+        fi
 
-# on:
-#   workflow_call:
-#     inputs:
-#       package:
-#         required: true
-#         type: string
-#     outputs:
-#       version:
-#         value: ${{ jobs.tags.outputs.tag }}
+        new_version="v${segments[0]}.${segments[1]}.${segments[2]}"
 
-# jobs:
-#   tags:
-#     runs-on: ubuntu-latest
-#     outputs:
-#       tag: ${{ steps.get-tag.outputs.tag }}
-#     steps:
-#       - uses: actions/checkout@v3
+        echo "new version: ($new_version)"
+        echo "result=(echo $new_version)" >> $GITHUB_OUTPUT
 
-#       - id: get-tag
-#         run: |
-#           git fetch --all --tags
-#           echo "tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
+    - id: push-tags
+      shell: bash
+      run: |
+        git config --global user.name "${{ env.USER_NAME }}"
+        git config --global user.email ${{ env.USER_EMAIL }}
+        git tag -a ${{ inputs.package }}/v${{ steps.versioning.outputs.result }} -m "test tags"
+        git push origin --tags

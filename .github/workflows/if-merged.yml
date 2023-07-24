@@ -64,18 +64,18 @@ jobs:
         with:
           package: ts
 
-      - name: Update LP Minor Version
+      - name: Update TS Minor Version
         if: github.ref_name == 'master'
         uses: ./.github/actions/auto_versioning
         with:
-          package: lp
+          package: ts
           segment: minor
           preivous: ${{ steps.get-version.outputs.version }}
 
-      - name: Update LP Path Version
-        if: github.ref_name == 'lp-qa'
+      - name: Update TS Path Version
+        if: github.ref_name == 'ts-qa'
         uses: ./.github/actions/auto_versioning
         with:
-          package: lp
+          package: ts
           segment: patch
           preivous: ${{ steps.get-version.outputs.version }}
