@@ -1,13 +1,14 @@
 name: get_latest_tag
 description: 'use this action to get a latest tag of package'
 inputs:
-  inputs:
-    package:
-      required: true
-      type: string
-  outputs:
-    version:
-      value: ${{ jobs.tags.outputs.tag }}
+  {}
+  # inputs:
+  #   package:
+  #     required: true
+  #     type: string
+  # outputs:
+  #   version:
+  #     value: ${{ jobs.tags.outputs.tag }}
 runs:
   using: 'composite'
   steps:
