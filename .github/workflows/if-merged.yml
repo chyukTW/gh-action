@@ -92,7 +92,7 @@ jobs:
   notion_versioning:
     needs: [lp_versioning, ts_versioning]
     if: always() && (needs.lp_versioning.result == 'success' || needs.ts_versioning.result == 'success')
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - run: |
           echo "${{ github.event.pull_request.title }}"
