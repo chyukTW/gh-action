@@ -1,0 +1,24 @@
+name: get_latest_tag
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        required: true
+        type: string
+    outputs:
+      version:
+        value: ${{ jobs.tags.outputs.tag }}
+
+jobs:
+  tags:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.get-tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: get-tag
+        run: |
+          git fetch --all --tags
+          echo "tag=$(echo `git tag -l --sort -v:refname "ts/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
