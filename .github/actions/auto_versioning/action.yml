@@ -21,10 +21,10 @@ runs:
 
         if [[ ${{ inputs.segment }} == 'minor' ]]
         then
-          new_segments="v${segments[0]}.${segments[1]+1}.0"
+          new_segments="${segments[0]}.${segments[1]+1}.0"
         elif [[ ${{ inputs.segment }} == 'patch' ]]
         then
-          new_segments="v${segments[0]}.${segments[1]}.${segments[2]+1}"
+          new_segments="${segments[0]}.${segments[1]}.${segments[2]+1}"
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
           exit 1
