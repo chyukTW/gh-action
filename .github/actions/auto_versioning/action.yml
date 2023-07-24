@@ -32,8 +32,8 @@ runs:
 
         new_version="v${segments[0]}.${segments[1]}.${segments[2]}"
 
-        echo "new version: ($new_version)"
-        echo "result=(echo $new_version)" >> $GITHUB_OUTPUT
+        echo "new version: $new_version"
+        echo "result=$new_version" >> $GITHUB_OUTPUT
 
     - id: push-tags
       shell: bash
