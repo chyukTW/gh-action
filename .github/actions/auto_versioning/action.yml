@@ -24,16 +24,7 @@ runs:
         echo "minor: ${segments[1]}"
         echo "patch: ${segments[2]}"
 
-        if [[ ${{ inputs.segment }} == 'minor' ]]
-        then
-          ((segments[1]++))
-        elif [[ ${{ inputs.segment }} == 'patch' ]]
-        then
-          ((segments[2]++))
-        else
-          echo "Invalid segment provided. Supported segments are minor or patch."
-          exit 1
-        fi
+        ((segments[2]++))
 
         echo "done if statement"
 
@@ -44,6 +35,40 @@ runs:
         echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
         echo "email=$(echo `git log -n 1 --pretty=format:%ae`)" >> $GITHUB_OUTPUT
         echo "semver=$new_version" >> $GITHUB_OUTPUT
+
+    # - id: versioning
+    #   shell: bash
+    #   run: |
+    #     version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
+    #     _segment=${{ inputs.segment }}
+    #     segments=(${version//./ })
+
+    #     echo "major: ${segments[0]}"
+    #     echo "minor: ${segments[1]}"
+    #     echo "patch: ${segments[2]}"
+
+    #     if [[ ${{ inputs.segment }} == 'minor' ]]
+    #     then
+    #       ((segments[1]++))
+    #     elif [[ ${{ inputs.segment }} == 'patch' ]]
+    #     then
+    #       ((segments[2]++))
+    #     else
+    #       echo "Invalid segment provided. Supported segments are minor or patch."
+    #       exit 1
+    #     fi
+
+    #     ((segments[2]++))
+
+    #     echo "done if statement"
+
+    #     new_version="v${segments[0]}.${segments[1]}.${segments[2]}"
+
+    #     echo "new version: $new_version"
+
+    #     echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
+    #     echo "email=$(echo `git log -n 1 --pretty=format:%ae`)" >> $GITHUB_OUTPUT
+    #     echo "semver=$new_version" >> $GITHUB_OUTPUT
 
     - id: push-tags
       shell: bash
