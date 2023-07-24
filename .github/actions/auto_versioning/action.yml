@@ -17,12 +17,13 @@ runs:
       shell: bash
       run: |
         version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
+        _segment=${{ inputs.segment }}"
         segments=(${version//./ })
 
-        if [[ ${{ inputs.segment }} == 'minor' ]]
+        if [[ $_segment == 'minor' ]]
         then
           ((segments[1]++))
-        elif [[ ${{ inputs.segment }} == 'patch' ]]
+        elif [[ $_segment == 'patch' ]]
         then
           ((segments[2]++))
         else
