@@ -20,6 +20,11 @@ runs:
         _segment=${{ inputs.segment }}
         segments=(${version//./ })
 
+        segments[0]=$((segments[0]))
+        segments[1]=$((segments[1]))
+        segments[2]=$((segments[2]))
+
+
         echo "major: ${segments[0]}"
         echo "minor: ${segments[1]}"
         echo "patch: ${segments[2]}"
