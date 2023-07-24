@@ -21,20 +21,20 @@ runs:
 
         if [[ ${{ inputs.segment }} == 'minor' ]]
         then
-          new_version="v${segments[0]}.${segments[1]+1}.0"
+          new_segments="v${segments[0]}.${segments[1]+1}.0"
         elif [[ ${{ inputs.segment }} == 'patch' ]]
         then
-          new_version="v${segments[0]}.${segments[1]}.${segments[2]+1}"
+          new_segments="v${segments[0]}.${segments[1]}.${segments[2]+1}"
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
           exit 1
         fi
 
-        echo "new version: $new_version"
+        echo "new segments: $new_segments"
 
         echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
         echo "email=$(echo `git log -n 1 --pretty=format:%ae`)" >> $GITHUB_OUTPUT
-        echo "semver=$new_version" >> $GITHUB_OUTPUT
+        echo "semver=v$new_segments" >> $GITHUB_OUTPUT
 
     - id: push-tags
       shell: bash
