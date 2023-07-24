@@ -42,7 +42,7 @@ jobs:
         with:
           package: lp
           segment: minor
-          preivous: ${{ steps.get-version.outputs.version }}
+          previous: ${{ steps.get-version.outputs.version }}
 
       - name: Update LP Path Version
         if: github.ref_name == 'lp-qa'
@@ -50,7 +50,7 @@ jobs:
         with:
           package: lp
           segment: patch
-          preivous: ${{ steps.get-version.outputs.version }}
+          previous: ${{ steps.get-version.outputs.version }}
 
   ts_version:
     needs: changes
@@ -70,7 +70,7 @@ jobs:
         with:
           package: ts
           segment: minor
-          preivous: ${{ steps.get-version.outputs.version }}
+          previous: ${{ steps.get-version.outputs.version }}
 
       - name: Update TS Path Version
         if: github.ref_name == 'ts-qa'
@@ -78,4 +78,4 @@ jobs:
         with:
           package: ts
           segment: patch
-          preivous: ${{ steps.get-version.outputs.version }}
+          previous: ${{ steps.get-version.outputs.version }}
