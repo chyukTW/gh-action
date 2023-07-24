@@ -96,7 +96,5 @@ jobs:
     steps:
       - run: |
           echo "${{ github.event.pull_request.title }}"
-          echo "${{ needs.lp_versioning.outputs.assignee }}"
-          echo "${{ needs.lp_versioning.outputs.version }}"
-          echo "${{ needs.ts_versioning.outputs.assignee }}"
-          echo "${{ needs.ts_versioning.outputs.version }}"
+          echo "${{ needs.ts_versioning.outputs.assignee || needs.lp_versioning.outputs.assignee }}"
+          echo "${{ needs.ts_versioning.outputs.version || needs.lp_versioning.outputs.version }}"
