@@ -1,13 +1,14 @@
 name: if-merged
 
 on:
-  pull_request:
-    types:
-      - closed
+  push
+  # pull_request:
+  #   types:
+  #     - closed
 
 jobs:
   changes:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       lp: ${{ steps.filter.outputs.lp }}

@@ -19,14 +19,15 @@ runs:
         version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
         segments=(${version//./ })
 
-        if [[ ${{ inputs.segment }} == minor ]]
+        if [[ ${{ inputs.segment }} == 'minor' ]]
         then
           ((segments[1]++))
-        elif [[ ${{ inputs.segment }} == patch ]]
+        elif [[ ${{ inputs.segment }} == 'patch' ]]
         then
           ((segments[2]++))
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
+          exit 1
         fi
 
         echo "done if statement"
