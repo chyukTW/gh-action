@@ -43,7 +43,7 @@ jobs:
           segment: minor
           previous: ${{ steps.get-version.outputs.version }}
 
-      - name: Update LP Path Version
+      - name: Update LP Patch Version
         if: github.ref_name == 'lp-qa'
         uses: ./.github/actions/auto_versioning
         with:

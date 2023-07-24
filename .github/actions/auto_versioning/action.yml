@@ -27,12 +27,14 @@ runs:
           ((segments[2]++))
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
-          exit 1
         fi
+
+        echo "done if statement"
 
         new_version="v${segments[0]}.${segments[1]}.${segments[2]}"
 
         echo "new version: $new_version"
+
         echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
         echo "email=$(echo `git log -n 1 --pretty=format:%ae`)" >> $GITHUB_OUTPUT
         echo "semver=$new_version" >> $GITHUB_OUTPUT
