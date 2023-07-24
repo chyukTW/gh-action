@@ -17,15 +17,19 @@ runs:
       shell: bash
       run: |
         version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
-        _segment=${{ inputs.segment }}
         segments=(${version//./ })
 
-        if [ '$_segment' == 'minor' ]
+        if [[ ${{ inputs.segment }} == 'minor' ]]
         then
           ((segments[1]++))
-        elif [ '$_segment' == 'patch' ]
+        fi
+
+        if [[ ${{ inputs.segment }} == 'patch' ]]
         then
           ((segments[2]++))
+        fi
+
+        if [[ !${{ contains('minor|patch', ${{ inputs.segment }}) }} ]]
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
           exit 1
