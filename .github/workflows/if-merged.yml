@@ -34,18 +34,20 @@ jobs:
       - name: Get Latest Version(LP)
         id: get-version
         uses: ./.github/actions/get_latest_tag
+        with:
+          package: lp
 
       - name: Update LP Minor Version
         if: github.ref_name == 'master'
         run: |
           echo "update lp minor"
-          echo "${{ steps.get-version.outputs.tag }}"
+          echo "${{ steps.get-version.outputs.version }}"
 
       - name: Update LP Path Version
         if: github.ref_name == 'lp-qa'
         run: |
           echo "update lp patch"
-          echo "${{ steps.get-version.outputs.tag }}"
+          echo "${{ steps.get-version.outputs.version }}"
 
   ts_version:
     needs: changes

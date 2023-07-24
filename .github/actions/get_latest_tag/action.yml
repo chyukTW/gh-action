@@ -1,23 +1,23 @@
 name: get_latest_tag
 description: 'use this action to get a latest tag of package'
 inputs:
-  {}
-  # inputs:
-  #   package:
-  #     required: true
-  #     type: string
-  # outputs:
-  #   version:
-  #     value: ${{ jobs.tags.outputs.tag }}
+  inputs:
+    package:
+      required: true
+  outputs:
+    version:
+      value: ${{ steps.get-tag.outputs.result }}
+
 runs:
   using: 'composite'
   steps:
     - uses: actions/checkout@v3
 
-    - shell: bash
+    - id: get-tag
+      shell: bash
       run: |
         git fetch --all --tags
-        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2
+        echo "tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
 
 # name: get_latest_tag
 
