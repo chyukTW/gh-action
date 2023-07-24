@@ -17,7 +17,7 @@ runs:
       shell: bash
       run: |
         version=$(echo ${{ inputs.previous }} | cut -d 'v' -f2)
-        _segment=${{ inputs.segment }}"
+        _segment=${{ inputs.segment }}
         segments=(${version//./ })
 
         if [[ $_segment == 'minor' ]]
