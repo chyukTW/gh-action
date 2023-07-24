@@ -33,7 +33,7 @@ jobs:
 
       - name: Get Latest Version(LP)
         id: get-version
-        uses: ./.github/actions/get_latest_tag.yml
+        uses: ./.github/actions/get_latest_tag
         with:
           package: lp
 
