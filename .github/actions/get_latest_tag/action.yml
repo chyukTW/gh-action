@@ -1,24 +1,43 @@
 name: get_latest_tag
+description: 'use this action to get a latest tag of package'
+inputs:
+  inputs:
+    package:
+      required: true
+      type: string
+  outputs:
+    version:
+      value: ${{ jobs.tags.outputs.tag }}
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v3
 
-on:
-  workflow_call:
-    inputs:
-      package:
-        required: true
-        type: string
-    outputs:
-      version:
-        value: ${{ jobs.tags.outputs.tag }}
+    - run: |
+        git fetch --all --tags
+        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2
 
-jobs:
-  tags:
-    runs-on: ubuntu-latest
-    outputs:
-      tag: ${{ steps.get-tag.outputs.tag }}
-    steps:
-      - uses: actions/checkout@v3
+# name: get_latest_tag
 
-      - id: get-tag
-        run: |
-          git fetch --all --tags
-          echo "tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
+# on:
+#   workflow_call:
+#     inputs:
+#       package:
+#         required: true
+#         type: string
+#     outputs:
+#       version:
+#         value: ${{ jobs.tags.outputs.tag }}
+
+# jobs:
+#   tags:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       tag: ${{ steps.get-tag.outputs.tag }}
+#     steps:
+#       - uses: actions/checkout@v3
+
+#       - id: get-tag
+#         run: |
+#           git fetch --all --tags
+#           echo "tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
