@@ -10,19 +10,20 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - id: get-commit-id
+      shell: bash
+      run: |
+        last_commit=`git log -n 1 --pretty=format:"%H"`
+
+        echo $last_commit
+
+        echo "result=$last_commit" >> $GITHUB_OUTPUT
+
     - id: get-tag
       shell: bash
       run: |
         git fetch --all --tags
 
-        last_commit=`git log -n 1 --pretty=format:"%H"`
+        echo ${{ steps.get-commit-id.outputs.result }}
 
-        echo $last_commit
-
-        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1`
-
-        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged fc561fd8201b3a4bef221fd0d08825f98d04c569 | head -n 1`
-
-        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $last_commit | head -n 1)
-
-        echo "result=$(echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $last_commit | head -n 1) | cut -d/ -f2)" >> $GITHUB_OUTPUT
+        echo "result=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged ${{ steps.get-commit-id.result }} | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
