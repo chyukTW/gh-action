@@ -10,27 +10,22 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    # - id: get-commit-id
-    #   shell: bash
-    #   run: |
-    #     last_commit=`git log -n 1 --pretty=format:"%H"`
-
-    #     echo $last_commit
-
-    #     echo "result=$last_commit" >> $GITHUB_OUTPUT
-
     - id: get-tag
       shell: bash
       run: |
-        git fetch --all --tags
+        echo $(git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H))
+
+        # git fetch ${{ github.ref_name }}
 
         # echo ${{ steps.get-commit-id.outputs.result }}
 
-        echo $(git rev-parse --abbrev-ref HEAD)
+        # echo $(git rev-parse --abbrev-ref HEAD)
 
-        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD))
+        # echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD))
 
-        tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD) | head -n 1` | cut -d/ -f2)
+        # tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD) | head -n 1` | cut -d/ -f2)
+
+        tag=$(echo $(git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H)) | head -n 1` | cut -d/ -f2)
 
         echo latest tag: $tag
 
