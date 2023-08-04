@@ -23,6 +23,6 @@ runs:
 
         echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged fc561fd8201b3a4bef221fd0d08825f98d04c569 | head -n 1`
 
-        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $last_commit | head -n 1`
+        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged "$last_commit" | head -n 1`
 
         echo "result=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $last_commit | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
