@@ -15,6 +15,6 @@ runs:
       run: |
         git fetch --all --tags
 
-        latest_commit=git log -n 1 --pretty=format:"%H"
+        latest_commit=`git log -n 1 --pretty=format:"%H"`
 
         echo "result=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $latest_commit | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
