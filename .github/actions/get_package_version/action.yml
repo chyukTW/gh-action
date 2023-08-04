@@ -25,7 +25,7 @@ runs:
 
         # echo $(git rev-parse --abbrev-ref HEAD)
 
-        # echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD))
+        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD))
 
         # tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD) | head -n 1` | cut -d/ -f2)
 
