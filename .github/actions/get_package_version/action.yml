@@ -26,4 +26,4 @@ runs:
 
         echo ${{ steps.get-commit-id.outputs.result }}
 
-        echo "result=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged "${{ steps.get-commit-id.outputs.result }}" | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
+        echo "result=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged ${{ steps.get-commit-id.outputs.result }} | head -n 1` | cut -d/ -f2)" >> $GITHUB_OUTPUT
