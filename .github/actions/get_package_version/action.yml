@@ -25,7 +25,7 @@ runs:
 
         # tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD) | head -n 1` | cut -d/ -f2)
 
-        tag=$(echo $(git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H)) | head -n 1` | cut -d/ -f2)
+        tag=$(echo `git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H) | head -n 1` | cut -d/ -f2)
 
         echo latest tag: $tag
 
