@@ -13,6 +13,8 @@ runs:
     - id: get-tag
       shell: bash
       run: |
+        git fetch --all --tags
+
         echo $(git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H"))
 
         # git fetch ${{ github.ref_name }}
@@ -25,7 +27,7 @@ runs:
 
         # tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD) | head -n 1` | cut -d/ -f2)
 
-        tag=$(echo `git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H") | head -n 1` | cut -d/ -f2)
+        tag=$(echo `git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H")` | cut -d/ -f2)
 
         echo latest tag: $tag
 
