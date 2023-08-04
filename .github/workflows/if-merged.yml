@@ -1,31 +1,32 @@
 name: if-merged
 
 on:
-  pull_request:
-    types:
-      - closed
+  push
+  # pull_request:
+  #   types:
+  #     - closed
 
 jobs:
-  changes:
-    # if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    outputs:
-      lp: ${{ steps.filter.outputs.lp }}
-      ts: ${{ steps.filter.outputs.ts }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            lp:
-              - 'packages/lp/**'
-            ts:
-              - 'packages/ts/**'
+  # changes:
+  #   # if: github.event.pull_request.merged == true
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     lp: ${{ steps.filter.outputs.lp }}
+  #     ts: ${{ steps.filter.outputs.ts }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: dorny/paths-filter@v2
+  #       id: filter
+  #       with:
+  #         filters: |
+  #           lp:
+  #             - 'packages/lp/**'
+  #           ts:
+  #             - 'packages/ts/**'
 
   lp_versioning:
-    needs: changes
-    if: needs.changes.outputs.lp == 'true'
+    # needs: changes
+    # if: needs.changes.outputs.lp == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,25 +36,28 @@ jobs:
         with:
           package: lp
 
-      - name: Update LP Minor Version
-        if: github.ref_name == 'master'
-        uses: ./.github/actions/auto_versioning
-        with:
-          package: lp
-          segment: minor
-          previous: ${{ steps.get-version.outputs.version }}
+      - id: echo
+        run: echo "${{ steps.get-version.outputs.version }}"
 
-      - name: Update LP Patch Version
-        if: github.ref_name == 'lp-qa'
-        uses: ./.github/actions/auto_versioning
-        with:
-          package: lp
-          segment: patch
-          previous: ${{ steps.get-version.outputs.version }}
+      # - name: Update LP Minor Version
+      #   if: github.ref_name == 'master'
+      #   uses: ./.github/actions/auto_versioning
+      #   with:
+      #     package: lp
+      #     segment: minor
+      #     previous: ${{ steps.get-version.outputs.version }}
+
+      # - name: Update LP Patch Version
+      #   if: github.ref_name == 'lp-qa'
+      #   uses: ./.github/actions/auto_versioning
+      #   with:
+      #     package: lp
+      #     segment: patch
+      #     previous: ${{ steps.get-version.outputs.version }}
 
   ts_versioning:
-    needs: changes
-    if: needs.changes.outputs.ts == 'true'
+    #   needs: changes
+    #   if: needs.changes.outputs.ts == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -63,18 +67,18 @@ jobs:
         with:
           package: ts
 
-      - name: Update TS Minor Version
-        if: github.ref_name == 'master'
-        uses: ./.github/actions/auto_versioning
-        with:
-          package: ts
-          segment: minor
-          previous: ${{ steps.get-version.outputs.version }}
+  #     - name: Update TS Minor Version
+  #       if: github.ref_name == 'master'
+  #       uses: ./.github/actions/auto_versioning
+  #       with:
+  #         package: ts
+  #         segment: minor
+  #         previous: ${{ steps.get-version.outputs.version }}
 
-      - name: Update TS Path Version
-        if: github.ref_name == 'ts-qa'
-        uses: ./.github/actions/auto_versioning
-        with:
-          package: ts
-          segment: patch
-          previous: ${{ steps.get-version.outputs.version }}
+  #     - name: Update TS Path Version
+  #       if: github.ref_name == 'ts-qa'
+  #       uses: ./.github/actions/auto_versioning
+  #       with:
+  #         package: ts
+  #         segment: patch
+  #         previous: ${{ steps.get-version.outputs.version }}
