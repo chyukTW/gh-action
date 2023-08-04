@@ -26,7 +26,7 @@ runs:
 
         # echo ${{ steps.get-commit-id.outputs.result }}
 
-        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD
+        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD)
 
         tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD | head -n 1` | cut -d/ -f2)
 
