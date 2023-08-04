@@ -30,11 +30,11 @@ runs:
 
         echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged '5513f59e0a2f5c2a6f3e78902a8c4aa3231e6cfc'`
 
-        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged ${{ steps.get-commit-id.outputs.result }}`
+        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged '${{ steps.get-commit-id.outputs.result }}'`
 
-        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged ${{ steps.get-commit-id.outputs.result }} | head -n 1`
+        echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged '${{ steps.get-commit-id.outputs.result }}' | head -n 1`
 
-        tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged ${{ steps.get-commit-id.outputs.result }} | head -n 1` | cut -d/ -f2)
+        tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged '${{ steps.get-commit-id.outputs.result }}' | head -n 1` | cut -d/ -f2)
 
         echo latest tag: $tag
 
