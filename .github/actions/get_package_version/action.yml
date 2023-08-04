@@ -26,9 +26,11 @@ runs:
 
         # echo ${{ steps.get-commit-id.outputs.result }}
 
-        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD)
+        echo $(git rev-parse --abbrev-ref HEAD)
 
-        tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD | head -n 1` | cut -d/ -f2)
+        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD))
+
+        tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged $(git rev-parse --abbrev-ref HEAD) | head -n 1` | cut -d/ -f2)
 
         echo latest tag: $tag
 
