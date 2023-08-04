@@ -67,6 +67,9 @@ jobs:
         with:
           package: ts
 
+      - id: echo
+        run: echo "${{ steps.get-version.outputs.version }}"
+
   #     - name: Update TS Minor Version
   #       if: github.ref_name == 'master'
   #       uses: ./.github/actions/auto_versioning
