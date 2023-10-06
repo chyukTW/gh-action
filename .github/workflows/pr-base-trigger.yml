@@ -22,9 +22,9 @@ jobs:
               - 'packages/ts/**'
 
       - name: CD(LP)
-        if: steps.filter.outputs.lp == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd')
+        if: steps.filter.outputs.lp == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd') && github.event.pull_request.state != 'closed'
         run: echo "cd lp"
 
       - name: CD(TS)
-        if: steps.filter.outputs.ts == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd')
+        if: steps.filter.outputs.ts == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd') && github.event.pull_request.state != 'closed'
         run: echo "cd ts"
