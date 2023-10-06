@@ -7,7 +7,7 @@ on:
       - synchronize
 
 jobs:
-  tests:
+  changes:
     if: github.event.pull_request.state != 'closed'
     runs-on: ubuntu-latest
     steps:
@@ -21,10 +21,16 @@ jobs:
             ts:
               - 'packages/ts/**'
 
-      - name: CD(LP)
-        if: steps.filter.outputs.lp == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd')
-        run: echo "cd lp"
+  lp_cd:
+    needs: [changes]
+    if: needs.changes.result == 'success' && contains(github.event.pull_request.labels.*.name, 'action:cd')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "cd lp"
 
-      - name: CD(TS)
-        if: steps.filter.outputs.ts == 'true' && contains(github.event.pull_request.labels.*.name, 'action:cd')
-        run: echo "cd ts"
+  ts_cd:
+    needs: [changes]
+    if: needs.changes.result == 'success' && contains(github.event.pull_request.labels.*.name, 'action:cd')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "cd ts"
