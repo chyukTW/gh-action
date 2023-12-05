@@ -1,4 +1,4 @@
-name: get_package_version
+name: get_latest_version
 description: 'use this action to get a latest tag of package'
 inputs:
   package:
@@ -17,9 +17,9 @@ runs:
 
         echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD | head -n 1 | cut -d/ -f2)
 
-        # tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD | head -n 1` | cut -d/ -f2)
+        tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/v*" --merged HEAD | head -n 1` | cut -d/ -f2)
 
-        tag=$(echo `git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H")` | cut -d/ -f2)
+        # tag=$(echo `git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H")` | cut -d/ -f2)
 
         echo latest tag: $tag
 
