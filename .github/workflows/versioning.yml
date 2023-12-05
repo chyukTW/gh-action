@@ -1,12 +1,6 @@
 name: versioning
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: push
 
 jobs:
   job1:
@@ -16,6 +10,7 @@ jobs:
       - id: ctx
         run: |
           echo ${{ github.event_name }}
+          echo ${{ github.ref }}
           echo ${{ github.head_ref }}
           echo ${{ github.ref_name }}
       # - uses: actions/checkout@v3
