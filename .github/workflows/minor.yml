@@ -25,13 +25,3 @@ jobs:
           echo ${{ github.ref }}
           echo ${{ github.head_ref }}
           echo ${{ github.ref_name }}
-  patch:
-    if: github.event_name == 'pull_request_target' && github.event.pull_request.merged == true && contains(github.head_ref, 'test')
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo 'pushed !, lets up patch !'
-          echo ${{ github.event_name }}
-          echo ${{ github.ref }}
-          echo ${{ github.head_ref }}
-          echo ${{ github.ref_name }}
