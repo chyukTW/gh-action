@@ -22,15 +22,16 @@ jobs:
       - id: merged
         if: github.event.pull_request.merged == true
         run: |
-          echo 'merged !'
+          echo 'merged !, lets up patch !'
           echo ${{ github.event_name }}
           echo ${{ github.ref }}
           echo ${{ github.head_ref }}
           echo ${{ github.ref_name }}
 
       - id: pushed
+        if: github.event.pull_request.merged == false
         run: |
-          echo 'pushed !'
+          echo 'pushed !, lets up minor !'
           echo ${{ github.event_name }}
           echo ${{ github.ref }}
           echo ${{ github.head_ref }}
