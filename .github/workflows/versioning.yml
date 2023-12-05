@@ -19,15 +19,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - id: merged
-        if: github.event_name == 'pull_request_target' && github.event.pull_request.merged == true
-        run: |
-          echo 'merged !, lets up patch !'
-          echo ${{ github.event_name }}
-          echo ${{ github.ref }}
-          echo ${{ github.head_ref }}
-          echo ${{ github.ref_name }}
-
       - id: pushed
         if: github.event_name == 'push' && github.event.pull_request.merged == false
         run: |
@@ -36,35 +27,3 @@ jobs:
           echo ${{ github.ref }}
           echo ${{ github.head_ref }}
           echo ${{ github.ref_name }}
-      # - uses: actions/checkout@v3
-      #   with:
-      #     fetch-depth: 0
-
-      # - id: get-latest-version
-      #   uses: ./.github/actions/get_latest_version
-      #   with:
-      #     package: lp
-
-      # - id: minor
-      #   uses: ./.github/actions/auto_versioning
-      #   with:
-      #     package: lp
-      #     segment: minor
-      #     previous: ${{ steps.get-latest-version.outputs.version }}
-      #     description: 'minor test'
-
-      # - id: patch
-      #   uses: ./.github/actions/auto_versioning
-      #   with:
-      #     package: lp
-      #     segment: patch
-      #     previous: ${{ steps.get-latest-version.outputs.version }}
-      #     description: 'patch test'
-
-      # - id: dev
-      #   uses: ./.github/actions/auto_versioning
-      #   with:
-      #     package: lp
-      #     segment: dev
-      #     previous: ${{ steps.get-latest-version.outputs.version }}
-      #     description: 'dev test'
