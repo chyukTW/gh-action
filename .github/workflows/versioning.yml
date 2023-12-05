@@ -10,7 +10,8 @@ jobs:
       - id: ctx
         run: |
           echo ${{ github.event_name }}
-          echo ${{ toJson(github.event) }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.ref_name }}
       # - uses: actions/checkout@v3
       #   with:
       #     fetch-depth: 0
