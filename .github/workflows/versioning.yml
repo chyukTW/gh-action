@@ -16,6 +16,14 @@ jobs:
         with:
           package: lp
 
+      - id: minor
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: minor
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: 'minor test'
+
       - id: patch
         uses: ./.github/actions/auto_versioning
         with:

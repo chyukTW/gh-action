@@ -50,7 +50,7 @@ runs:
         fi
 
         echo "new version: $new_version"
-        echo "new_version=v$new_version" >> $GITHUB_OUTPUT
+        echo "new_version=$new_version" >> $GITHUB_OUTPUT
 
     - id: push-tags
       shell: bash
