@@ -10,14 +10,17 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v3
-
     - id: get-tag
       shell: bash
       run: |
         git fetch --all --tags
 
-        tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" | head -n 1` | cut -d/ -f2)
+        echo $(git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD | head -n 1 | cut -d/ -f2)
+
+        # tag=$(echo `git tag -l --sort -v:refname "${{ inputs.package }}/*" --merged HEAD | head -n 1` | cut -d/ -f2)
+
+        tag=$(echo `git describe --abbrev=0 --tags --match="${{ inputs.package }}/*" $(git log -n 1 --pretty=format:"%H")` | cut -d/ -f2)
 
         echo latest tag: $tag
+
         echo "result=$tag" >> $GITHUB_OUTPUT
