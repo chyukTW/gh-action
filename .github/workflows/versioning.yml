@@ -10,7 +10,7 @@ jobs:
       - id: ctx
         run: |
           echo ${{ github.event_name }}
-          echo ${{ github.event }}
+          echo ${{ toJson(github.event) }}
       # - uses: actions/checkout@v3
       #   with:
       #     fetch-depth: 0
