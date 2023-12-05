@@ -20,6 +20,13 @@ runs:
   steps:
     - uses: actions/checkout@v3
 
+    - id: commit-info
+      shell: bash
+      run: |
+        echo "hash=$(echo `git log -n 1 --pretty=format:%H` | cut -c -7)" >> $GITHUB_OUTPUT
+        echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
+        echo "email=$(echo `git log -n 1 --pretty=format:%ae`)" >> $GITHUB_OUTPUT
+
     - id: versioning
       shell: bash
       run: |
@@ -30,25 +37,25 @@ runs:
 
         if [[ ${{ inputs.segment }} == 'minor' ]]
         then
-          new_version=$(echo $major.$((minor+1)).0)
+          new_version=$(echo v$major.$((minor+1)).0)
         elif [[ ${{ inputs.segment }} == 'patch' ]]
         then
-          new_version=$(echo $major.$minor.$((patch+1)))
+          new_version=$(echo v$major.$minor.$((patch+1)))
+        elif [[ ${{ inputs.segment }} == 'dev' ]]
+        then
+          new_version=$(echo dev-${{ steps.commit-info.outputs.hash }})
         else
           echo "Invalid segment provided. Supported segments are minor or patch."
           exit 1
         fi
 
         echo "new version: $new_version"
-
-        echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
-        echo "email=$(echo `git log -n 1 --pretty=format:%ae`)" >> $GITHUB_OUTPUT
-        echo "semver=v$new_version" >> $GITHUB_OUTPUT
+        echo "new_version=v$new_version" >> $GITHUB_OUTPUT
 
     - id: push-tags
       shell: bash
       run: |
-        git config --global user.name "${{ steps.versioning.outputs.username }}"
-        git config --global user.email ${{  steps.versioning.outputs.email }}
-        git tag -a ${{ inputs.package }}/${{ steps.versioning.outputs.semver }} -m "${{ inputs.description }}"
+        git config --global user.name "${{ steps.commit-info.outputs.username }}"
+        git config --global user.email ${{  steps.commit-info.outputs.email }}
+        git tag -a ${{ inputs.package }}/${{ steps.versioning.outputs.new_version }} -m "${{ inputs.description }}"
         git push origin --tags

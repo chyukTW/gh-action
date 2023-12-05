@@ -16,10 +16,18 @@ jobs:
         with:
           package: lp
 
-      - id: version
+      - id: patch
         uses: ./.github/actions/auto_versioning
         with:
           package: lp
           segment: patch
           previous: ${{ steps.get-latest-version.outputs.version }}
-          description: 'test'
+          description: 'patch test'
+
+      - id: dev
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: dev
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: 'dev test'
