@@ -1,5 +1,4 @@
 # !1 local qa -> remote qa -> minor up (on push)
-
 # !2 remote fix -> remote qa -> patch up (on PR) -> push
 
 name: versioning
@@ -15,14 +14,23 @@ on:
       - closed
 
 jobs:
-  job1:
+  minor:
+    if: github.event_name == 'push' && github.event.pull_request.merged == false
     runs-on: ubuntu-latest
 
     steps:
-      - id: pushed
-        if: github.event_name == 'push' && github.event.pull_request.merged == false
-        run: |
+      - run: |
           echo 'pushed !, lets up minor !'
+          echo ${{ github.event_name }}
+          echo ${{ github.ref }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.ref_name }}
+  patch:
+    if: github.event_name == 'pull_request_target' && github.event.pull_request.merged == true && contains(github.head_ref, 'test')
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo 'pushed !, lets up patch !'
           echo ${{ github.event_name }}
           echo ${{ github.ref }}
           echo ${{ github.head_ref }}
