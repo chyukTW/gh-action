@@ -1,10 +1,10 @@
 const a = {
   after: '15927f9b89a8eb2aebd19833686fc61ea9dfa122',
-  base_ref: 'refs/heads/master',
+  base_ref: 'refs/heads/master', // !!
   before: '0000000000000000000000000000000000000000',
-  commits: [],
+  commits: [], // !!
   compare: 'https://github.com/chyukTW/gh-action/compare/lp-qa',
-  created: true,
+  created: true, // !!
   deleted: false,
   forced: false,
   head_commit: {
@@ -20,7 +20,7 @@ const a = {
     },
     distinct: true,
     id: '15927f9b89a8eb2aebd19833686fc61ea9dfa122',
-    message: 'Merge pull request #111 from chyukTW/feat-123\n\n123',
+    message: 'Merge pull request #111 from chyukTW/feat-123\n\n123', // !!
     timestamp: '2023-12-07T01:59:25+09:00',
     tree_id: 'e1ba8bc28ad254ef27f467e267ef85022c547c8d',
     url: 'https://github.com/chyukTW/gh-action/commit/15927f9b89a8eb2aebd19833686fc61ea9dfa122',
