@@ -34,9 +34,11 @@ runs:
             },
             "properties": {
               "파트": {
-                "multi-select": {
-                  "contains": "${{ inputs.package }}"
-                }
+                "multi_select": [
+                  {
+                    "name": "${{ inputs.package }}"
+                  }
+                ]
               },
               "플랫폼": {
                 "select": {

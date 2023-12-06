@@ -27,10 +27,6 @@ jobs:
     needs: changes
     if: needs.changes.outputs.lp == 'true'
     runs-on: ubuntu-latest
-    outputs:
-      package: lp
-      version: ${{ steps.update-patch.outputs.version }}
-      assignee: ${{ steps.update-patch.outputs.assignee }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -65,18 +61,14 @@ jobs:
         with:
           package: LP
           deployment: DEV
-          version: ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
-          assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+          version: ${{ steps.update-patch.outputs.version || steps.update-dev.outputs.version }}
+          assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.assignee }}
           description: ${{ github.event.pull_request.title }}
 
   ts_versioning:
     needs: changes
     if: needs.changes.outputs.ts == 'true'
     runs-on: ubuntu-latest
-    outputs:
-      package: ts
-      version: ${{ steps.update-patch.outputs.version }}
-      assignee: ${{ steps.update-patch.outputs.assignee }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -111,6 +103,6 @@ jobs:
         with:
           package: TS
           deployment: DEV
-          version: ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
-          assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+          version: ${{ steps.update-patch.outputs.version || steps.update-dev.outputs.version }}
+          assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.assignee }}
           description: ${{ github.event.pull_request.title }}

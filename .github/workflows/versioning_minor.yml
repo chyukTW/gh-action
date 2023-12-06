@@ -38,7 +38,7 @@ jobs:
         with:
           package: LP
           deployment: DEV
-          version: ${{ steps.update-minor.outputs.new_version }}
+          version: ${{ steps.update-minor.outputs.version }}
           assignee: ${{ steps.update-minor.outputs.assignee }}
           description: ${{ github.event.head_commit.message }}
 
@@ -73,6 +73,6 @@ jobs:
         with:
           package: TS
           deployment: DEV
-          version: ${{ steps.update-minor.outputs.new_version }}
+          version: ${{ steps.update-minor.outputs.version }}
           assignee: ${{ steps.update-minor.outputs.assignee }}
           description: ${{ github.event.head_commit.message }}
