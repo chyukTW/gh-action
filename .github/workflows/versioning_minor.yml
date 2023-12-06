@@ -8,7 +8,7 @@ on:
 
 jobs:
   lp_versioning:
-    if: github.ref_name == 'lp-qa' && contains(github.event.head_commit.message, 'Merge pull request') == false
+    if: github.ref_name == 'lp-qa' && github.event.created == true
     runs-on: ubuntu-latest
     outputs:
       package: lp
@@ -43,7 +43,7 @@ jobs:
           description: ${{ github.event.head_commit.message }}
 
   ts_versioning:
-    if: github.ref_name == 'ts-qa' && contains(github.event.head_commit.message, 'Merge pull request') == false
+    if: github.ref_name == 'ts-qa' && github.event.created == true
     runs-on: ubuntu-latest
     outputs:
       package: ts
