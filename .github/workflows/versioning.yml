@@ -1,0 +1,156 @@
+name: versioning
+
+on:
+  push:
+    branches:
+      - 'lp-qa'
+      - 'ts-qa'
+      - 'lp-stg'
+      - 'ts-stg'
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  changes:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    outputs:
+      lp: ${{ steps.filter.outputs.lp }}
+      ts: ${{ steps.filter.outputs.ts }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            lp:
+              - 'packages/lp/**'
+            ts:
+              - 'packages/ts/**'
+
+  lp_versioning:
+    needs: changes
+    if: needs.changes.outputs.lp == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      package: lp
+      version: ${{ steps.update-minor.outputs.version }}
+      assignee: ${{ steps.update-minor.outputs.assignee }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - id: get-latest-version
+        uses: ./.github/actions/get_latest_version
+        with:
+          package: lp
+
+      - id: update-dev
+        if: github.event_name == 'pull_request' && github.ref_name == 'master' && contains(github.head_ref, 'feat')
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: dev
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.pull_request.title }}
+
+      - id: update-patch
+        if: github.event_name == 'pull_request' && contains(github.ref_name, 'lp') && contains(github.head_ref, 'fix')
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: patch
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.pull_request.title }}
+
+      - id: update-minor
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request') == false
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: minor
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.pull_request.title }}
+
+      # - name: Notion Versioning
+      #   if: steps.update-minor.outcome == 'success' || steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
+      #   uses: ./.github/actions/notion_versioning
+      #   with:
+      #     package: LP
+      #     version: ${{ steps.update-minor.outputs.new_version || steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
+      #     assignee: ${{ steps.update-minor.outputs.assignee || steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+      #     description: ${{ github.event.pull_request.title || github.event.head_commit.message }}
+      #     api_key: ${{ secrets.NOTION_API_KEY }}
+
+      - name: Notion Versioning
+        if: steps.update-minor.outcome == 'success' || steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
+        run: |
+          echo LP NOTION
+          echo ${{ steps.update-minor.outputs.new_version || steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
+          echo ${{ steps.update-minor.outputs.assignee || steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+          echo ${{ github.event.pull_request.title || github.event.head_commit.message }}
+
+  ts_versioning:
+    needs: changes
+    if: needs.changes.outputs.ts == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      package: ts
+      version: ${{ steps.update-minor.outputs.version }}
+      assignee: ${{ steps.update-minor.outputs.assignee }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - id: get-latest-version
+        uses: ./.github/actions/get_latest_version
+        with:
+          package: ts
+
+      - id: update-dev
+        if: github.event_name == 'pull_request' && github.ref_name == 'master' && contains(github.head_ref, 'feat')
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: ts
+          segment: dev
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.pull_request.title }}
+
+      - id: update-patch
+        if: github.event_name == 'pull_request' && contains(github.ref_name, 'ts') && contains(github.head_ref, 'fix')
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: ts
+          segment: patch
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.pull_request.title }}
+
+      - id: update-minor
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request') == false
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: ts
+          segment: minor
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.pull_request.title }}
+
+      # - name: Notion Versioning
+      #   if: steps.update-minor.outcome == 'success' || steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
+      #   uses: ./.github/actions/notion_versioning
+      #   with:
+      #     package: TS
+      #     version: ${{ steps.update-minor.outputs.new_version || steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
+      #     assignee: ${{ steps.update-minor.outputs.assignee || steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+      #     description: ${{ github.event.pull_request.title || github.event.head_commit.message }}
+      #     api_key: ${{ secrets.NOTION_API_KEY }}
+
+      - name: Notion Versioning
+        if: steps.update-minor.outcome == 'success' || steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
+        run: |
+          echo TS NOTION
+          echo ${{ steps.update-minor.outputs.new_version || steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
+          echo ${{ steps.update-minor.outputs.assignee || steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+          echo ${{ github.event.pull_request.title || github.event.head_commit.message }}
