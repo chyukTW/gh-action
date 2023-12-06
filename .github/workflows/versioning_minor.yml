@@ -37,7 +37,7 @@ jobs:
         uses: ./.github/actions/notion_versioning
         with:
           package: LP
-          deployment: DEV
+          deployment: QA
           version: ${{ steps.update-minor.outputs.version }}
           assignee: ${{ steps.update-minor.outputs.assignee }}
           description: ${{ github.event.head_commit.message }}
@@ -72,7 +72,7 @@ jobs:
         uses: ./.github/actions/notion_versioning
         with:
           package: TS
-          deployment: DEV
+          deployment: QA
           version: ${{ steps.update-minor.outputs.version }}
           assignee: ${{ steps.update-minor.outputs.assignee }}
           description: ${{ github.event.head_commit.message }}

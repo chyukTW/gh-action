@@ -60,7 +60,7 @@ jobs:
         uses: ./.github/actions/notion_versioning
         with:
           package: LP
-          deployment: DEV
+          deployment: ${{ steps.update-dev.outcome == 'success' && 'DEV' || (contains(github.ref_name, 'qa') && 'QA' || 'STG') }}
           version: ${{ steps.update-patch.outputs.version || steps.update-dev.outputs.version }}
           assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.assignee }}
           description: ${{ github.event.pull_request.title }}
@@ -102,7 +102,7 @@ jobs:
         uses: ./.github/actions/notion_versioning
         with:
           package: TS
-          deployment: DEV
+          deployment: ${{ steps.update-dev.outcome == 'success' && 'DEV' || (contains(github.ref_name, 'qa') && 'QA' || 'STG') }}
           version: ${{ steps.update-patch.outputs.version || steps.update-dev.outputs.version }}
           assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.assignee }}
           description: ${{ github.event.pull_request.title }}
