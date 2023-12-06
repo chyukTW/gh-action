@@ -59,23 +59,15 @@ jobs:
           previous: ${{ steps.get-latest-version.outputs.version }}
           description: ${{ github.event.pull_request.title }}
 
-      # - name: Notion Versioning
-      #   if: steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
-      #   uses: ./.github/actions/notion_versioning
-      #   with:
-      #     package: LP
-      #     version: ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
-      #     assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
-      #     description: ${{ github.event.pull_request.title }}
-      #     api_key: ${{ secrets.NOTION_API_KEY }}
-
-      - name: Notion Versioning Description
+      - name: Notion Versioning
         if: steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
-        run: |
-          echo LP NOTION
-          echo ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
-          echo ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
-          echo ${{ github.event.pull_request.title }}
+        uses: ./.github/actions/notion_versioning
+        with:
+          package: LP
+          deployment: DEV
+          version: ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
+          assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+          description: ${{ github.event.pull_request.title }}
 
   ts_versioning:
     needs: changes
@@ -113,20 +105,12 @@ jobs:
           previous: ${{ steps.get-latest-version.outputs.version }}
           description: ${{ github.event.pull_request.title }}
 
-      # - name: Notion Versioning
-      #   if: steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
-      #   uses: ./.github/actions/notion_versioning
-      #   with:
-      #     package: TS
-      #     version: ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
-      #     assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
-      #     description: ${{ github.event.pull_request.title || github.event.head_commit.message }}
-      #     api_key: ${{ secrets.NOTION_API_KEY }}
-
-      - name: Notion Versioning Description
+      - name: Notion Versioning
         if: steps.update-patch.outcome == 'success' || steps.update-dev.outcome == 'success'
-        run: |
-          echo TS NOTION
-          echo ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
-          echo ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
-          echo ${{ github.event.pull_request.title }}
+        uses: ./.github/actions/notion_versioning
+        with:
+          package: TS
+          deployment: DEV
+          version: ${{ steps.update-patch.outputs.new_version || steps.update-dev.outputs.new_version }}
+          assignee: ${{ steps.update-patch.outputs.assignee || steps.update-dev.outputs.new_version }}
+          description: ${{ github.event.pull_request.title }}

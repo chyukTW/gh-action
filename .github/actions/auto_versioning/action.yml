@@ -11,7 +11,7 @@ inputs:
     default: ''
 outputs:
   version:
-    value: ${{ steps.versioning.outputs.semver }}
+    value: ${{ steps.versioning.outputs.new_version }}
   assignee:
     value: ${{ steps.versioning.outputs.username }}
 
@@ -23,7 +23,7 @@ runs:
     - id: commit-info
       shell: bash
       run: |
-        echo "hash=$(echo `git log -n 1 --pretty=format:%H` | cut -c -7)" >> $GITHUB_OUTPUT
+        echo "hash=$(echo `git log -n 1 --pretty=format:%H` | cut -c -12)" >> $GITHUB_OUTPUT
         echo "username=$(echo `git log -n 1 --pretty=format:%an`)" >> $GITHUB_OUTPUT
         echo "email=$(echo `git log -n 1 --pretty=format:%ae`)" >> $GITHUB_OUTPUT
 

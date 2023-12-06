@@ -32,23 +32,15 @@ jobs:
           previous: ${{ steps.get-latest-version.outputs.version }}
           description: ${{ github.event.head_commit.message }}
 
-      # - name: Notion Versioning
-      #   if: steps.update-minor.outcome == 'success'
-      #   uses: ./.github/actions/notion_versioning
-      #   with:
-      #     package: LP
-      #     version: ${{ steps.update-minor.outputs.new_version }}
-      #     assignee: ${{ steps.update-minor.outputs.assignee }}
-      #     description: ${{ github.event.head_commit.message }}
-      #     api_key: ${{ secrets.NOTION_API_KEY }}
-
       - name: Notion Versioning
         if: steps.update-minor.outcome == 'success'
-        run: |
-          echo LP NOTION
-          echo ${{ steps.update-minor.outputs.new_version }}
-          echo ${{ steps.update-minor.outputs.assignee }}
-          echo ${{ github.event.head_commit.message }}
+        uses: ./.github/actions/notion_versioning
+        with:
+          package: LP
+          deployment: DEV
+          version: ${{ steps.update-minor.outputs.new_version }}
+          assignee: ${{ steps.update-minor.outputs.assignee }}
+          description: ${{ github.event.head_commit.message }}
 
   ts_versioning:
     if: github.ref_name == 'ts-qa' && contains(github.event.head_commit.message, 'Merge pull request') == false
@@ -75,20 +67,12 @@ jobs:
           previous: ${{ steps.get-latest-version.outputs.version }}
           description: ${{ github.event.head_commit.message }}
 
-      # - name: Notion Versioning
-      #   if: steps.update-minor.outcome == 'success'
-      #   uses: ./.github/actions/notion_versioning
-      #   with:
-      #     package: TS
-      #     version: ${{ steps.update-minor.outputs.new_version }}
-      #     assignee: ${{ steps.update-minor.outputs.assignee }}
-      #     description: ${{ github.event.head_commit.message }}
-      #     api_key: ${{ secrets.NOTION_API_KEY }}
-
       - name: Notion Versioning
         if: steps.update-minor.outcome == 'success'
-        run: |
-          echo TS NOTION
-          echo ${{ steps.update-minor.outputs.new_version }}
-          echo ${{ steps.update-minor.outputs.assignee }}
-          echo ${{ github.event.head_commit.message }}
+        uses: ./.github/actions/notion_versioning
+        with:
+          package: TS
+          deployment: DEV
+          version: ${{ steps.update-minor.outputs.new_version }}
+          assignee: ${{ steps.update-minor.outputs.assignee }}
+          description: ${{ github.event.head_commit.message }}

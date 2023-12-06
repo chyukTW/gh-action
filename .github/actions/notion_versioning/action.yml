@@ -1,0 +1,83 @@
+name: notion_versioning
+description: use this action to update the package version on Notion
+inputs:
+  deployment:
+    required: true
+  package:
+    required: true
+  version:
+    required: true
+  description:
+    required: true
+  assignee:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - id: get-current-date
+      shell: bash
+      run: |
+        sudo timedatectl set-timezone Asia/Seoul
+        echo "date=$(date +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_OUTPUT
+
+    - name: Use Notion API
+      shell: bash
+      run: |
+        curl -X POST 'https://api.notion.com/v1/pages' \
+          -H 'Authorization: Bearer secret_dlmzc911Xx4dNJZsHYoQtMZoPwqHLl2oVFFr2KZvMjL' \
+          -H "Content-Type: application/json" \
+          -H "Notion-Version: 2022-06-28" \
+          --data '{
+            "parent": {
+              "database_id": "5680d53da5814c549291e3ef37694f38"
+            },
+            "properties": {
+              "파트": {
+                "multi-select": {
+                  "contains": "${{ inputs.package }}"
+                }
+              },
+              "플랫폼": {
+                "select": {
+                  "name": "MP"
+                }
+              },
+              "배포 환경": {
+                "select": {
+                  "name": "${{ inputs.deployment }}"
+                }
+              },
+              "배포 상태": {
+                "select": {
+                  "name": "완료"
+                }
+              },
+              "배포 일시": {
+                "date": {
+                  "start": "${{ steps.get-current-date.outputs.date }}",
+                  "time_zone": "Asia/Seoul"
+                }
+              },
+              "개정 버전": {
+                "title": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "[${{ inputs.package }}-MP] ${{ inputs.version }}"
+                    }
+                  }
+                ]
+              },
+              "담당자": {
+                "rich_text": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "${{ inputs.assignee }}"
+                    }
+                  }
+                ]
+              }
+            }
+          }'
