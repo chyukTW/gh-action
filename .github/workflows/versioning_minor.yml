@@ -1,0 +1,94 @@
+name: versioning_minor
+
+on:
+  push:
+    branches:
+      - 'lp-qa'
+      - 'ts-qa'
+
+jobs:
+  lp_versioning:
+    if: github.ref_name == 'lp-qa' && contains(github.event.head_commit.message, 'Merge pull request') == false
+    runs-on: ubuntu-latest
+    outputs:
+      package: lp
+      version: ${{ steps.update-minor.outputs.version }}
+      assignee: ${{ steps.update-minor.outputs.assignee }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - id: get-latest-version
+        uses: ./.github/actions/get_latest_version
+        with:
+          package: lp
+
+      - id: update-minor
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: lp
+          segment: minor
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.head_commit.message }}
+
+      # - name: Notion Versioning
+      #   if: steps.update-minor.outcome == 'success'
+      #   uses: ./.github/actions/notion_versioning
+      #   with:
+      #     package: LP
+      #     version: ${{ steps.update-minor.outputs.new_version }}
+      #     assignee: ${{ steps.update-minor.outputs.assignee }}
+      #     description: ${{ github.event.head_commit.message }}
+      #     api_key: ${{ secrets.NOTION_API_KEY }}
+
+      - name: Notion Versioning
+        if: steps.update-minor.outcome == 'success'
+        run: |
+          echo LP NOTION
+          echo ${{ steps.update-minor.outputs.new_version }}
+          echo ${{ steps.update-minor.outputs.assignee }}
+          echo ${{ github.event.head_commit.message }}
+
+  ts_versioning:
+    if: github.ref_name == 'ts-qa' && contains(github.event.head_commit.message, 'Merge pull request') == false
+    runs-on: ubuntu-latest
+    outputs:
+      package: ts
+      version: ${{ steps.update-minor.outputs.version }}
+      assignee: ${{ steps.update-minor.outputs.assignee }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - id: get-latest-version
+        uses: ./.github/actions/get_latest_version
+        with:
+          package: ts
+
+      - id: update-minor
+        uses: ./.github/actions/auto_versioning
+        with:
+          package: ts
+          segment: minor
+          previous: ${{ steps.get-latest-version.outputs.version }}
+          description: ${{ github.event.head_commit.message }}
+
+      # - name: Notion Versioning
+      #   if: steps.update-minor.outcome == 'success'
+      #   uses: ./.github/actions/notion_versioning
+      #   with:
+      #     package: TS
+      #     version: ${{ steps.update-minor.outputs.new_version }}
+      #     assignee: ${{ steps.update-minor.outputs.assignee }}
+      #     description: ${{ github.event.head_commit.message }}
+      #     api_key: ${{ secrets.NOTION_API_KEY }}
+
+      - name: Notion Versioning
+        if: steps.update-minor.outcome == 'success'
+        run: |
+          echo TS NOTION
+          echo ${{ steps.update-minor.outputs.new_version }}
+          echo ${{ steps.update-minor.outputs.assignee }}
+          echo ${{ github.event.head_commit.message }}
