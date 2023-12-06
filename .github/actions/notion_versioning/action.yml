@@ -70,16 +70,6 @@ runs:
                     }
                   }
                 ]
-              },
-              "담당자": {
-                "rich_text": [
-                  {
-                    "type": "text",
-                    "text": {
-                      "content": "${{ inputs.assignee }}"
-                    }
-                  }
-                ]
               }
             }
           }'
