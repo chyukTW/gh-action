@@ -46,12 +46,12 @@ runs:
                 }
               },
               "배포 환경": {
-                "status": {
+                "select": {
                   "name": "${{ inputs.deployment }}"
                 }
               },
               "배포 상태": {
-                "select": {
+                "status": {
                   "name": "완료"
                 }
               },
