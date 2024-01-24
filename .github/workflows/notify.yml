@@ -28,7 +28,7 @@ jobs:
           SLACK_CHANNEL: noti
           SLACK_ICON: https://github.com/chyukTW/onboarding/assets/103919739/f5595f6c-0380-485a-9acf-ea47409bbe12
           SLACK_USERNAME: LP-MP-BOT
-          SLACK_MSG_AUTHOR: '123123'
+          SLACK_MSG_AUTHOR: false
           SLACK_TITLE: '[LP-MP 배포 완료]'
           SLACK_COLOR: '#5E3FDD'
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
