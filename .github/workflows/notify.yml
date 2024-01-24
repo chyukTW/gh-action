@@ -11,11 +11,13 @@ jobs:
       - name: Set a Message
         run: |
           slack_message="
+          *  환경:* DEV
           *  버전:* v0.150.0
           *  배포:* <https://dev-lp-mp.taras.twinny.ai| 링크>
           *  패치노트:* <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| 링크>"
 
           echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
+          echo -e '\n' >> $GITHUB_ENV
           echo "$slack_message" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
@@ -26,6 +28,6 @@ jobs:
           SLACK_CHANNEL: noti
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/232180361-cee0795a-27b6-4344-b9fa-1ef5280d1afc.png
           SLACK_USERNAME: LP-MP-BOT
-          SLACK_TITLE: '[LP-MP 배포 안내]'
+          SLACK_TITLE: '[LP-MP 배포 완료]'
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
           MSG_MINIMAL: true
