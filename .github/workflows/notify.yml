@@ -8,21 +8,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: Set a Message
-      #   run: |
-      #     echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
-      #     echo -e '\n' >> $GITHUB_ENV
-      #     echo -e 'hello' >> $GITHUB_ENV
-      #     echo 'EOF' >> $GITHUB_ENV
+      - name: Set a Message
+        id: set_slack_message
+        run: |
+          slack_message="*  버전:* v0.150.0
+          *  배포: <https://dev-lp-mp.taras.twinny.ai| 링크>
+          *  패치노트:* <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| 링크>"
+
+          echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
+          echo "$slack_message" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
 
       - name: Send to Slack
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CHANNEL: noti
-          SLACK_ICON: https://user-images.githubusercontent.com/103919739/231953977-9e7b49b0-3187-4b95-abb3-d9fdac81bf6e.png
+          SLACK_ICON: https://user-images.githubusercontent.com/103919739/232180361-cee0795a-27b6-4344-b9fa-1ef5280d1afc.png
           SLACK_USERNAME: LP-MP-BOT
           SLACK_TITLE: '[LP-MP 배포 안내]'
-          SLACK_MESSAGE: ''
-          SLACK_FOOTER: <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| :point_right:ㅤClick for more details>
+          SLACK_MESSAGE: ${{ steps.set_slack_message.outputs.SLACK_MESSAGE }}
+          SLACK_FOOTER: <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| 패치노트>
           MSG_MINIMAL: true
