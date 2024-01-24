@@ -18,7 +18,7 @@ jobs:
       - name: Send to Slack
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_CHANNEL: noti
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/177964568-30ec9c4d-9528-4c88-8191-364ee4033d3c.png
           SLACK_USERNAME: LP-MP-BOT
