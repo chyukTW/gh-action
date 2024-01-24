@@ -11,7 +11,7 @@ jobs:
       - name: Set a Message
         run: |
           slack_message="
-          * *
+
           *  환경:* DEV
           *  버전:* v0.150.0
           *  배포:* <https://dev-lp-mp.taras.twinny.ai| 링크>
