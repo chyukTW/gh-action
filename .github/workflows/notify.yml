@@ -9,7 +9,6 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set a Message
-        id: set_slack_message
         run: |
           slack_message="*  버전:* v0.150.0
           *  배포: <https://dev-lp-mp.taras.twinny.ai| 링크>
@@ -27,6 +26,5 @@ jobs:
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/232180361-cee0795a-27b6-4344-b9fa-1ef5280d1afc.png
           SLACK_USERNAME: LP-MP-BOT
           SLACK_TITLE: '[LP-MP 배포 안내]'
-          SLACK_MESSAGE: ${{ steps.set_slack_message.outputs.SLACK_MESSAGE }}
-          SLACK_FOOTER: <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| 패치노트>
+          SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
           MSG_MINIMAL: true
