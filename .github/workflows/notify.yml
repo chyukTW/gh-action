@@ -23,5 +23,6 @@ jobs:
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/231953977-9e7b49b0-3187-4b95-abb3-d9fdac81bf6e.png
           SLACK_USERNAME: LP-MP-BOT
           SLACK_TITLE: '[LP-MP 배포 안내]'
-          SLACK_MESSAGE: 'hahaha'
+          SLACK_MESSAGE: ''
+          SLACK_FOOTER: <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| :point_right:ㅤClick for more details>
           MSG_MINIMAL: true
