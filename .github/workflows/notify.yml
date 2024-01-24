@@ -24,5 +24,4 @@ jobs:
           SLACK_USERNAME: LP-MP-BOT
           SLACK_TITLE: '[LP-MP 배포 안내]'
           SLACK_MESSAGE: 'hahaha'
-          SLACK_FOOTER: <https://github.com/twinnylab/taras-web/actions/runs/${{ github.run_id }}| :point_right:ㅤClick for more details>
           MSG_MINIMAL: true
