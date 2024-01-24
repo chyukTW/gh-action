@@ -1,0 +1,8 @@
+name: cd
+
+on: push
+
+jobs:
+  call_failure_notify:
+    uses: ./.github/workflows/notify.yml
+    secrets: inherit
