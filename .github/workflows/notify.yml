@@ -11,11 +11,11 @@ jobs:
       - name: Set a Message
         run: |
           slack_message="
-           
+          ㅤ
           *  환경:* DEV
           *  버전:* v0.150.0
-          *  배포:* <https://dev-lp-mp.taras.twinny.ai| 링크>
-          *  패치노트:* <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| 링크>"
+          *  배포:* <https://dev-lp-mp.taras.twinny.ai| 클릭>
+          *  패치노트:* <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| 클릭>"
 
           echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
           echo "$slack_message" >> $GITHUB_ENV
