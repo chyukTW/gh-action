@@ -8,12 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set a Message
-        run: |
-          echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
-          echo -e '\n' >> $GITHUB_ENV
-          echo 'hello' >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+      # - name: Set a Message
+      #   run: |
+      #     echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
+      #     echo -e '\n' >> $GITHUB_ENV
+      #     echo -e 'hello' >> $GITHUB_ENV
+      #     echo 'EOF' >> $GITHUB_ENV
 
       - name: Send to Slack
         uses: rtCamp/action-slack-notify@v2
@@ -22,7 +22,7 @@ jobs:
           SLACK_CHANNEL: noti
           SLACK_ICON: https://user-images.githubusercontent.com/103919739/177964568-30ec9c4d-9528-4c88-8191-364ee4033d3c.png
           SLACK_USERNAME: LP-MP-BOT
-          SLACK_TITLE: '[LP-MP 배포 안내]'
-          SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
+          SLACK_TITLE: '[LP-MP 배포 안내 ]'
+          SLACK_MESSAGE: 'hahaha'
           SLACK_FOOTER: <https://github.com/twinnylab/taras-web/actions/runs/${{ github.run_id }}| :point_right:ㅤClick for more details>
           MSG_MINIMAL: true
