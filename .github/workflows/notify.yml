@@ -18,6 +18,7 @@ jobs:
 
           echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
           echo -e '\n' >> $GITHUB_ENV
+          echo -e '\n' >> $GITHUB_ENV
           echo "$slack_message" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
