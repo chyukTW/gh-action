@@ -27,7 +27,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CHANNEL: noti
-          SLACK_ICON: https://github.com/chyukTW/onboarding/assets/103919739/0c85d224-2470-427c-9b21-a81c27e4d597
+          SLACK_ICON: https://github.com/chyukTW/onboarding/assets/103919739/f5595f6c-0380-485a-9acf-ea47409bbe12
           SLACK_USERNAME: LP-MP-BOT
           SLACK_TITLE: '[LP-MP 배포 완료]'
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
