@@ -4,11 +4,17 @@ on: push
 
 jobs:
   call_failure_notify:
-    uses: ./.github/workflows/notify.yml
-    with:
-      package: LP
-      branch: DEV
-      version: v1.1.1
-      deployment: https://dev-lp-mp.taras.twinny.ai
-      patch_note: https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4
-    secrets: inherit
+    runs-on: unbuntu-latest
+
+    steps:
+      - name: Echo
+        run: echo "hello"
+
+      - name: notify
+        uses: ./.github/workflows/notify.yml
+        with:
+          package: LP
+          branch: DEV
+          version: v1.1.1
+          deployment: https://dev-lp-mp.taras.twinny.ai
+          patch_note: https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4
