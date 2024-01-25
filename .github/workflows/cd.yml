@@ -28,3 +28,4 @@ jobs:
       version: ${{ needs.deploy.outputs.version }}
       deployment: ${{ needs.deploy.outputs.deployment }}
       patch_note: https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4
+    secrets: inherit
