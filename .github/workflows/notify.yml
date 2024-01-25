@@ -1,6 +1,23 @@
 name: deployment_notify
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      package:
+        required: true
+        type: string
+      branch:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      deployment:
+        required: true
+        type: string
+      patch_note:
+        required: true
+        type: string
 
 jobs:
   slack_notify:
@@ -11,11 +28,10 @@ jobs:
       - name: Set a Message
         run: |
           slack_message="
-          ㅤ
-          *  환경:* DEV
-          *  버전:* v0.150.0
-          *  배포:* <https://dev-lp-mp.taras.twinny.ai| 클릭>
-          *  패치노트:* <https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4| 클릭>"
+          *  환경:* ${{ inputs.branch }}
+          *  버전:* ${{ inputs.version }}
+          *  배포:* <${{ inputs.deployment }}| 클릭>
+          *  패치노트:* <${{ inputs.patch_note }}| 클릭>"
 
           echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
           echo "$slack_message" >> $GITHUB_ENV
@@ -27,9 +43,9 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CHANNEL: noti
           SLACK_ICON: https://github.com/chyukTW/onboarding/assets/103919739/f5595f6c-0380-485a-9acf-ea47409bbe12
-          SLACK_USERNAME: LP-MP-BOT
+          SLACK_USERNAME: ${{ inputs.package }}-MP-BOT
           SLACK_MSG_AUTHOR: false
-          SLACK_TITLE: '[LP-MP 배포 완료]'
+          SLACK_TITLE: '[${{ inputs.package }}-MP 배포 완료]'
           SLACK_COLOR: '#5E3FDD'
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
           SLACK_FOOTER: ''
