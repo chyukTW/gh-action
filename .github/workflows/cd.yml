@@ -12,7 +12,7 @@ jobs:
       deployment: https://${{ steps.get-bucket-name.outputs.bucketName }}
     steps:
       - id: get-branch
-        run: echo "public_branch=DEV" >> "$GITHUB_OUTPUT"
+        run: echo "public_branch=스테이징" >> "$GITHUB_OUTPUT"
       - id: get-latest-version
         run: echo "version=v0.1.21" >> "$GITHUB_OUTPUT"
       - id: get-bucket-name
