@@ -3,18 +3,28 @@ name: cd
 on: push
 
 jobs:
-  call_failure_notify:
-    runs-on: unbuntu-latest
-
+  deploy:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      branch: ${{ steps.get-branch.outputs.branch }}
+      version: ${{ steps.get-latest-version.outputs.version }}
+      deployment: ${{ steps.get-bucket-name.outputs.bucketName }}
     steps:
-      - name: Echo
-        run: echo "hello"
+      - id: get-branch
+        run: echo "branch=DEV" >> "$GITHUB_OUTPUT"
+      - id: get-latest-version
+        run: echo "version=v0.1.1" >> "$GITHUB_OUTPUT"
+      - id: get-bucket-name
+        run: echo "bucketName=https://dev-lp-mp.taras.twinny.ai" >> "$GITHUB_OUTPUT"
 
-      - name: notify
-        uses: ./.github/workflows/notify.yml
-        with:
-          package: LP
-          branch: DEV
-          version: v1.1.1
-          deployment: https://dev-lp-mp.taras.twinny.ai
-          patch_note: https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4
+  notification:
+    name: notification
+    needs: deploy
+    uses: ./.github/workflows/notify.yml
+    with:
+      package: LP
+      branch: ${{ needs.deploy.outputs.branch }}
+      version: ${{ needs.deploy.outputs.version }}
+      deployment: ${{ needs.deploy.outputs.deployment }}
+      patch_note: https://www.notion.so/twinny/704f3b548f9940298f5f59ef6eab460e?v=65dbd47e960c4936aec2ae71ab9c3ff2&pvs=4
