@@ -17,6 +17,8 @@ jobs:
         run: echo "version=v0.1.21" >> "$GITHUB_OUTPUT"
       - id: get-bucket-name
         run: echo "bucketName=dev-lp-mp.taras.twinny.ai" >> "$GITHUB_OUTPUT"
+      - id: failure
+        run: exit 1
 
   notification:
     name: notification
