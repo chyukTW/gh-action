@@ -28,10 +28,8 @@ jobs:
       - name: Set a Message
         run: |
           slack_message="
-          *  환경:* ${{ inputs.branch }}
-          *  버전:* ${{ inputs.version }}
-          *  배포:* <${{ inputs.deployment }}| 클릭>
-          *  패치노트:* <${{ inputs.patch_note }}| 클릭>"
+          <* 환경:* ${{ inputs.deployment }}| ${{ inputs.branch }}>
+          <* 버전:* ${{ inputs.deployment }}| ${{ inputs.patch_note }}>
 
           echo 'SLACK_MESSAGE<<EOF' >> $GITHUB_ENV
           echo "$slack_message" >> $GITHUB_ENV
