@@ -42,7 +42,7 @@ jobs:
           SLACK_CHANNEL: noti
           SLACK_ICON: https://github.com/chyukTW/gh-action/assets/103919739/313ad160-b5ba-4f90-ab6a-f656dbf9d76e
           SLACK_USERNAME: ${{ inputs.package }}-MP-BOT
-          SLACK_TITLE: '[${{ inputs.package }}-MP(${{ inputs.version }}) 배포 완료]'
+          SLACK_TITLE: '[${{ inputs.package }}-MP `${{ inputs.version }}` 배포 완료]'
           SLACK_COLOR: '#5E3FDD'
           SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
           SLACK_FOOTER: '배포 및 패치노트를 확인하고 싶다면 위 링크를 클릭해 주세요.'
