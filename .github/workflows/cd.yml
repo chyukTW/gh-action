@@ -7,16 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     # Map a step output to a job output
     outputs:
-      branch: ${{ steps.get-branch.outputs.branch }}
+      branch: ${{ steps.get-branch.outputs.public_branch }}
       version: ${{ steps.get-latest-version.outputs.version }}
-      deployment: ${{ steps.get-bucket-name.outputs.bucketName }}
+      deployment: https://${{ steps.get-bucket-name.outputs.bucketName }}
     steps:
       - id: get-branch
-        run: echo "branch=DEV" >> "$GITHUB_OUTPUT"
+        run: echo "public_branch=DEV" >> "$GITHUB_OUTPUT"
       - id: get-latest-version
-        run: echo "version=v0.1.1" >> "$GITHUB_OUTPUT"
+        run: echo "version=v0.1.21" >> "$GITHUB_OUTPUT"
       - id: get-bucket-name
-        run: echo "bucketName=https://dev-lp-mp.taras.twinny.ai" >> "$GITHUB_OUTPUT"
+        run: echo "bucketName=dev-lp-mp.taras.twinny.ai" >> "$GITHUB_OUTPUT"
 
   notification:
     name: notification
