@@ -21,9 +21,9 @@ jobs:
       #   run: exit 1
 
   notification:
-    if: ${{ needs.deploy.outputs.branch }} != 'DEV'
     name: notification
     needs: deploy
+    if: contains(needs.deploy.outputs.branch, 'dev')
     uses: ./.github/workflows/notify.yml
     with:
       package: LP
